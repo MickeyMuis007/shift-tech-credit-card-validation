@@ -29,5 +29,8 @@ Processed cards should not be reprocessed.
 
 ![Selection_085](https://user-images.githubusercontent.com/17546093/87581918-fba02200-c6d9-11ea-8ee4-84fccf07ad89.png)
 
+## DB Models
+![Selection_087](https://user-images.githubusercontent.com/17546093/87583957-090adb80-c6dd-11ea-95e5-c70036fc1cbf.png)
+
 ## References
 > https://www.freeformatter.com/credit-card-number-generator-validator.html
