@@ -13,6 +13,7 @@ namespace CreditCardValidation.API.Configurations.DIConfig
       services.AddTransient<IPropertyMappingService, PropertyMappingService>();
       services.AddTransient<IPropertyCheckerService, PropertyCheckerService>();
 
+      MappingProfileDIConfig.Configure(services);
       TestDIConfig.Configure(services);
     }
 
