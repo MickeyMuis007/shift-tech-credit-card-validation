@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "V57YYIHFWDW9cEyxO7sGKwbJ5MHm8fTU4O5x9+IDDrBCvh4iIxvlUjPlSRIcvs4bP8aDT1bNpMgFPzIoDbmtRQ==",
+  "success": true,
+  "projectFilePath": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Common/CreditCardValidation.Common.csproj",
+  "expectedPackageFiles": [
+    "/home/michael/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/home/michael/.nuget/packages/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
