@@ -1,9 +1,9 @@
 # shift-tech-credit-card-validation
 
-##Intro
+## Intro
 We want to write a system that allows our admins to submit a bunch of credit card numbers for validation. (Please read the guidelines below.)
 
-##Requirements
+## Requirements
 Build an ASP.Net MVC application that can do the following:
 Allow the user to submit a valid credit card number. 
 Make a configurable list of credit card providers(VISA, AMEX, MasterCard, Discover). 
