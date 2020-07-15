@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Application.Interfaces;
-using Application.Interfaces.PropertyMapping;
 using API.Configurations.Conventions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MyRestaurant.CMS.API.Enums;
+using CreditCardValidation.API.Enums;
 using CreditCardValidation.Common.Models.TestModels;
 using CreditCardValidation.Domain.TestAggregate;
+using SharedKernel.Interfaces;
 using SharedKernel.Models;
 using SharedKernel.Extensions;
 

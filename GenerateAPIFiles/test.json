@@ -3,6 +3,7 @@
     "name": "Test",
     "idDataType": "Guid",
     "listName": "Tests",
+    "isAggregateRoot": true,
     "properties": [
       {
         "name": "Id",
@@ -116,6 +117,13 @@
     "namespace": "CreditCardValidation.Persistence.Configurations",
     "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Persistence/Configurations"
   },
+  "dBContext": {
+    "name": "CreditCardValidationDBContexts",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Persistence.Contexts",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Persistence/Contexts"
+  },
   "repositoryImpl": {
     "name": "TestRepository",
     "properties": [],
@@ -125,6 +133,7 @@
   },
   "controller": {
     "name": "TestController",
+    "enumNamespace": "CreditCardValidation.API.Enums",
     "properties": [
     ],
     "imports": [

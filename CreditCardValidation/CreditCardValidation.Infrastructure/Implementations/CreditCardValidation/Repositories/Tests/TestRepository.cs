@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 using CreditCardValidation.Domain.TestAggregate;
 using CreditCardValidation.Persistence.Contexts;
 using SharedKernel.Models;
-using CreditCardValidation.Common.Models.TestModels;
 using SharedKernel.Interfaces;
-using SharedKernel.Helpers;
+
 namespace CreditCardValidation.Infrastructure.Implementations.CreditCardValidation.Repositories.Tests
 {
 	public class TestRepository : Repository<Test, Guid, TestQueryParams> , ITestRepository
