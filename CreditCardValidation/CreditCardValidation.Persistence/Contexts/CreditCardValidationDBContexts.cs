@@ -17,6 +17,7 @@ namespace CreditCardValidation.Persistence.Contexts {
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
       modelBuilder.ApplyConfiguration(new TestConfiguration());
+      modelBuilder.ApplyConfiguration(new CreditCardStatusConfiguration());
       base.OnModelCreating(modelBuilder);
     }
   }

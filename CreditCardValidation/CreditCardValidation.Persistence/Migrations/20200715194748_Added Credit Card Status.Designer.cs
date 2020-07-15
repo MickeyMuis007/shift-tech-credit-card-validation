@@ -3,14 +3,16 @@ using System;
 using CreditCardValidation.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CreditCardValidation.Persistence.Migrations
 {
     [DbContext(typeof(CreditCardValidationDBContexts))]
-    partial class CreditCardValidationDBContextsModelSnapshot : ModelSnapshot
+    [Migration("20200715194748_Added Credit Card Status")]
+    partial class AddedCreditCardStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
