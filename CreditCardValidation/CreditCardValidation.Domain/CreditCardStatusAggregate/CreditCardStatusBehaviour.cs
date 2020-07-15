@@ -41,14 +41,16 @@ namespace CreditCardValidation.Domain.CreditCardStatusAggregate
 		}
 		public async Task<CreditCardStatusDTO> Update()
 		{
-			var creditCardStatus = await _unitOfWork.CreditCardStatusRepository.GetById(Id);
-			if (creditCardStatus == null) return null;
+			var exists = _unitOfWork.CreditCardStatusRepository.Exists(Id);
+			if (!exists) return null;
 
-			_mapper.Map(_creditCardStatus, creditCardStatus);
+			
+			_unitOfWork.CreditCardStatusRepository.Update(_creditCardStatus);
 			await _unitOfWork.SaveAsync();
-			var creditCardStatusDTO = _mapper.Map<CreditCardStatusDTO>(creditCardStatus);
+			var creditCardStatusDTO = _mapper.Map<CreditCardStatusDTO>(_creditCardStatus);
 			return creditCardStatusDTO;
 		}
+		
 		public async Task<CreditCardStatusDTO> Delete()
 		{
 			var creditCardStatus = await _unitOfWork.CreditCardStatusRepository.GetById(Id);

@@ -38,5 +38,9 @@ namespace CreditCardValidation.Infrastructure.Implementations.CreditCardValidati
 			return creditCardStatuses;
 			
 		}
+
+		public bool Exists(Guid id) {
+			return  _db.CreditCardStatuses.Any(t => t.Id == id);
+		}
 	}
 }

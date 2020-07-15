@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using SharedKernel.Models;
 using SharedKernel.Interfaces;
 using CreditCardValidation.Common.Models.TestModels;
+using CreditCardValidation.Common.Models.CreditCardStatuses;
 using CreditCardValidation.Domain.TestAggregate;
+using CreditCardValidation.Domain.CreditCardStatusAggregate;
 
 namespace Application.Services
 {
@@ -17,12 +19,15 @@ namespace Application.Services
         { "Id", new PropertyMappingValue(new List<string>() { "Id" })},
         { "Name", new PropertyMappingValue(new List<string>() { "Name", "LastName"})},
         { "Age", new PropertyMappingValue(new List<string>() { "BirthDate"}, revert: true)},
-        { "PhoneNumber", new PropertyMappingValue(new List<string>() {"PhoneNumber"})}
+        { "PhoneNumber", new PropertyMappingValue(new List<string>() {"PhoneNumber"})},
+        { "Status", new PropertyMappingValue(new List<string>() {"Status"})},
+        { "Description", new PropertyMappingValue(new List<string>() {"Description"})}
       };
 
     public PropertyMappingService() {
       _propertyMappings = new List<IPropertyMapping>();
       _propertyMappings.Add(new PropertyMapping<TestDTO, Test>(_teacherPropertyMapping));
+      _propertyMappings.Add(new PropertyMapping<CreditCardStatusDTO, CreditCardStatus>(_teacherPropertyMapping));
     }
 
 
