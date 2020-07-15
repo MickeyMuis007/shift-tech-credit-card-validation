@@ -1,0 +1,251 @@
+{
+  "domain": {
+    "name": "Test",
+    "idDataType": "Guid",
+    "listName": "Tests",
+    "properties": [
+      {
+        "name": "Id",
+        "dataType": "Guid"
+      },
+      {
+        "name": "Name",
+        "dataType": "string",
+        "isSearchQuery": true,
+        "orderBy": 1
+      },
+      {
+        "name": "LastName",
+        "dataType": "string",
+        "isSearchQuery": true,
+        "orderBy": 2
+      },
+      {
+        "name": "PhoneNumber",
+        "dataType": "string",
+        "isSearchQuery": true,
+        "orderBy": 0
+      },
+      {
+        "name": "BirthDate",
+        "dataType": "DateTime?"
+      }
+    ],
+    "imports": [
+      
+    ],
+    "namespace": "CreditCardValidation.Domain.TestAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/TestAggregate",
+    "inheritance": []
+  },
+  "builder": {
+    "name": "TestBuilder",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Domain.TestAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/TestAggregate"
+  },
+  "unitOfWork": {
+    "name": "ITestUnitOfWork",
+    "properties": [
+    ],
+    "imports": [],
+    "namespace": "CreditCardValidation.Domain.TestAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/TestAggregate"
+  },
+  "unitOfWorkImpl": {
+    "name": "TestUnitOfWork",
+    "properties": [
+    ],
+    "imports": [],
+    "namespace": "CreditCardValidation.Infrastructure.Implementations.CreditCardValidation.Repositories.Tests",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Infrastructure/Implementations/CreditCardValidation/Repositories/Tests"
+  },
+  "repository": {
+    "name": "ITestRepository",
+    "properties": [
+    ],
+    "imports": ["System", "SharedKernel.Interfaces"],
+    "namespace": "CreditCardValidation.Domain.TestAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/TestAggregate"
+  },
+  "queryParams": {
+    "name": "TestQueryParams",
+    "properties": [
+    ],
+    "imports": [
+      "SharedKernel.Models"
+    ],
+    "namespace": "CreditCardValidation.Domain.TestAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/TestAggregate",
+    "inheritance": ["QueryParams"]
+  },
+  "behaviour": {
+    "name": "TestBehaviour",
+    "properties": [
+      {
+        "name": "_unitOfWork2",
+        "dataType": "ITestUnitOfWork",
+        "modifier": "private",
+        "accessor": 1
+      }
+    ],
+    "imports": [
+    ],
+    "namespace": "CreditCardValidation.Domain.TestAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/TestAggregate"
+  },
+  "dIConfig": {
+    "name": "TestDIConfig",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.API.Configurations.DIConfig.Tests",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.API/Configurations/DIConfig/Tests"
+  },
+  "mappingProfile": {
+    "name": "TestMappingProfile",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Application.Mappings",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Application/Mappings"
+  },
+  "configuration": {
+    "name": "TestConfiguration",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Persistence.Configurations",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Persistence/Configurations"
+  },
+  "repositoryImpl": {
+    "name": "TestRepository",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Infrastructure.Implementations.CreditCardValidation.Repositories.Tests",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Infrastructure/Implementations/CreditCardValidation/Repositories/Tests"
+  },
+  "controller": {
+    "name": "TestController",
+    "properties": [
+    ],
+    "imports": [
+    ],
+    "namespace": "CreditCardValidation.API.Controllers",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.API/Controllers"
+  },
+  "dTOs": [
+    {
+      "name": "TestDTO",
+      "type": 0,
+      "properties": [
+        {
+          "name": "Id",
+          "dataType": "Guid",
+          "mapping": "Id"
+        },
+        {
+          "name": "Name",
+          "dataType": "string",
+          "mapping": "Name"
+        },
+        {
+          "name": "LastName",
+          "dataType": "string",
+          "mapping": "LastName"
+        },
+        {
+          "name": "PhoneNumber",
+          "dataType": "string",
+          "mapping": "PhoneNumber"
+        },
+        {
+          "name": "BirthDate",
+          "dataType": "DateTime?",
+          "mapping": "BirthDate"
+        }
+      ],
+      "imports": [
+        "System",
+        "SharedKernel.Interfaces"
+      ],
+      "namespace": "CreditCardValidation.Common.Models.TestModels",
+      "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Common/Models/Tests",
+      "inheritance": ["IDTO"]
+    },
+    {
+      "name": "TestInsertDTO",
+      "type": 1,
+      "properties": [
+        {
+          "name": "Id",
+          "dataType": "Guid",
+          "mapping": "Id"
+        },
+        {
+          "name": "Name",
+          "dataType": "string",
+          "mapping": "Name"
+        },
+        {
+          "name": "LastName",
+          "dataType": "string",
+          "mapping": "LastName"
+        },
+        {
+          "name": "PhoneNumber",
+          "dataType": "string",
+          "mapping": "PhoneNumber"
+        },
+        {
+          "name": "BirthDate",
+          "dataType": "DateTime?",
+          "mapping": "BirthDate"
+        }
+      ],
+      "imports": [
+        "System",
+        "SharedKernel.Interfaces"
+      ],
+      "namespace": "CreditCardValidation.Common.Models.TestModels",
+      "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Common/Models/Tests",
+      "inheritance": ["ICreateDTO"]
+    },
+    {
+      "name": "TestUpdateDTO",
+      "type": 2,
+      "properties": [
+        {
+          "name": "Id",
+          "dataType": "Guid",
+          "mapping": "Id"
+        },
+        {
+          "name": "Name",
+          "dataType": "string",
+          "mapping": "Name"
+        },
+        {
+          "name": "LastName",
+          "dataType": "string",
+          "mapping": "LastName"
+        },
+        {
+          "name": "PhoneNumber",
+          "dataType": "string",
+          "mapping": "PhoneNumber"
+        },
+        {
+          "name": "BirthDate",
+          "dataType": "DateTime?",
+          "mapping": "BirthDate"
+        }
+      ],
+      "imports": [
+        "System",
+        "SharedKernel.Interfaces"
+      ],
+      "namespace": "CreditCardValidation.Common.Models.TestModels",
+      "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Common/Models/Tests",
+      "inheritance": ["IUpdateDTO"]
+    }
+  ]
+}

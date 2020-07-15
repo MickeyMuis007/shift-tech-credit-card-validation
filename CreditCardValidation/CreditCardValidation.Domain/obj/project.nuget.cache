@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "eY3lC9wWBy9JnB1p3e/Z2DMOfqgK43rnYoBr4RciftEtcH9YFLRJxmWJo1ytC7R7CF+9R2gm6SgVLi3fzn2u/g==",
+  "dgSpecHash": "Lg2iuYA1/NRG1oROE21dvllq/HSTy0LgeZLip1FdVu2CBq4KHmPmKpVt/gDP8gLkw7WOxLhJDjLiLRFPAMZ7rw==",
   "success": true,
   "projectFilePath": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardValidation.Domain.csproj",
   "expectedPackageFiles": [

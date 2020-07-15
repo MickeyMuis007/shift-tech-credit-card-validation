@@ -9,6 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../CreditCardValidation.Persistence/CreditCardValidation.Persistence.csproj" />
+    <ProjectReference Include="../CreditCardValidation.Application/CreditCardValidation.Application.csproj" />
     <ProjectReference Include="../../SharedKernel/SharedKernel.csproj" />
   </ItemGroup>
 

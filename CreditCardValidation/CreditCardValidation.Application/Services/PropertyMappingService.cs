@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using SharedKernel.Models;
 using SharedKernel.Interfaces;
+using CreditCardValidation.Common.Models.TestModels;
+using CreditCardValidation.Domain.TestAggregate;
 
 namespace Application.Services
 {

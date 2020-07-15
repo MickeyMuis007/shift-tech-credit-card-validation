@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-using CreditCardValidation.Persistence.Configuration;
+using CreditCardValidation.Persistence.Configurations;
 using CreditCardValidation.Domain.ApplicationUserAggreggate;
+using CreditCardValidation.Domain.TestAggregate;
 
 namespace CreditCardValidation.Persistence.Contexts {
   public class CreditCardValidationDBContexts : IdentityDbContext<ApplicationUser> {
-    public CMSDbContexts (DbContextOptions<CMSDbContexts> options): base(options) {
+    public CreditCardValidationDBContexts (DbContextOptions<CreditCardValidationDBContexts> options): base(options) {
 
     }
 

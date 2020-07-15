@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 using SharedKernel.Interfaces;
 using SharedKernel.Models;
-using Persistence.Contexts;
+using CreditCardValidation.Persistence.Contexts;
 
-namespace Infrastructure.Implementations.Learnex.Repositories {
+namespace CreditCardValidation.Infrastructure.Implementations.CreditCardValidation.Repositories {
   public abstract class Repository<TEntity, TId, TQuery> : IAggregateRoot where TEntity : class where TQuery : QueryParams{
-     protected readonly CMSDbContexts _db;
+     protected readonly CreditCardValidationDBContexts _db;
 
-    public Repository(CMSDbContexts db) {
+    public Repository(CreditCardValidationDBContexts db) {
       _db = db;
     }
 

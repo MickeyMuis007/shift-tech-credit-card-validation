@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hdCOEhi106D/r0lJwrXRgu58zo4CySDtKg5NktwRZQLuhrHKzwbyA+zfaOZn2vyEvv+26yKZ42sbKrZFk8RKFA==",
+  "dgSpecHash": "Ax4jHiGcc2yVl1MsHqAh2oSeT6Pxne7tUwyqjmQLwYnasM5ok2m0Znt+vsx6QCrNbnPjtlQpLtaBaD3bgqJ9Pw==",
   "success": true,
   "projectFilePath": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Persistence/CreditCardValidation.Persistence.csproj",
   "expectedPackageFiles": [
