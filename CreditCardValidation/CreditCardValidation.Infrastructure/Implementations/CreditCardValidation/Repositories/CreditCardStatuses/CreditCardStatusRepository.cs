@@ -3,7 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using CreditCardValidation.Domain.CreditCardStatusAggregate;
 using CreditCardValidation.Persistence.Contexts;
+using CreditCardValidation.Common.Models.CreditCardStatuses;
 using SharedKernel.Models;
+using SharedKernel.Helpers;
 using SharedKernel.Interfaces;
 
 namespace CreditCardValidation.Infrastructure.Implementations.CreditCardValidation.Repositories.CreditCardStatuses
@@ -32,6 +34,8 @@ namespace CreditCardValidation.Infrastructure.Implementations.CreditCardValidati
 					creditCardStatusesQueryable = creditCardStatusesQueryable.OrderBy(t => t.Status)
 						.ThenBy(t => t.Description);
 				}
+				var creditCardStatusPropertyMappingDictionary = _propertyMappingService.GetPropertyMapping<CreditCardStatusDTO, CreditCardStatus>();
+				creditCardStatusesQueryable = creditCardStatusesQueryable.ApplySort(queryParams.OrderBy, creditCardStatusPropertyMappingDictionary);;
 			}
 
 			var creditCardStatuses = await PagedList<CreditCardStatus>.Create(creditCardStatusesQueryable, queryParams.PageNumber, queryParams.PageSize);
@@ -39,8 +43,9 @@ namespace CreditCardValidation.Infrastructure.Implementations.CreditCardValidati
 			
 		}
 
-		public bool Exists(Guid id) {
-			return  _db.CreditCardStatuses.Any(t => t.Id == id);
+		public bool Exists(Guid id)
+		{
+			return _db.CreditCardStatuses.Any(t => t.Id == id);
 		}
 	}
 }

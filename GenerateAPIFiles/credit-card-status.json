@@ -56,7 +56,7 @@
     "name": "ICreditCardStatusRepository",
     "properties": [
     ],
-    "imports": ["System", "SharedKernel.Interfaces"],
+    "imports": [],
     "namespace": "CreditCardValidation.Domain.CreditCardStatusAggregate",
     "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardStatusAggregate"
   },
