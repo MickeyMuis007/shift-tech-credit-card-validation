@@ -24,3 +24,7 @@ Processed cards should not be reprocessed.
 > - Multiply the digits in odd positions (1, 3, 5, etc.) by 2 and subtract 9 to all any result higher than 9
 > - Add all the numbers together
 > - The check digit (the last number of the card) is the amount that you would need to add to get a multiple of 10 (Modulo 10)
+
+![Selection_086](https://user-images.githubusercontent.com/17546093/87582286-7cf7b480-c6da-11ea-8982-aab6fa9872d3.png)
+
+![Selection_085](https://user-images.githubusercontent.com/17546093/87581918-fba02200-c6d9-11ea-8ee4-84fccf07ad89.png)
