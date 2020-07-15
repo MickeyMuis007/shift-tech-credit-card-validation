@@ -21,6 +21,7 @@ using IdentityServer4.AccessTokenValidation;
 
 using CreditCardValidation.Domain.ApplicationUserAggreggate;
 using CreditCardValidation.Persistence.Contexts;
+using CreditCardValidation.API.Configurations.DIConfig;
 namespace CreditCardValidation.API
 {
     public class Startup
@@ -122,6 +123,8 @@ namespace CreditCardValidation.API
                 );
             });
 
+            DIConfig.Configure(services);
+            MappingProfileDIConfig.Configure(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
