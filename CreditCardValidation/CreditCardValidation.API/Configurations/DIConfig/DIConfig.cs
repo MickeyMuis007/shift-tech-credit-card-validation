@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using CreditCardValidation.API.Configurations.DIConfig.Tests;
+using CreditCardValidation.API.Configurations.DIConfig.CreditCardStatuses;
 using SharedKernel.Interfaces;
 using Application.Services;
 
@@ -15,6 +16,7 @@ namespace CreditCardValidation.API.Configurations.DIConfig
 
       MappingProfileDIConfig.Configure(services);
       TestDIConfig.Configure(services);
+      CreditCardStatusDIConfig.Configure(services);
     }
 
   }

@@ -1,0 +1,216 @@
+{
+  "domain": {
+    "name": "CreditCardStatus",
+    "idDataType": "Guid",
+    "listName": "CreditCardStatuses",
+    "isAggregateRoot": true,
+    "properties": [
+      {
+        "name": "Id",
+        "dataType": "Guid"
+      },
+      {
+        "name": "Status",
+        "dataType": "string",
+        "isSearchQuery": true,
+        "orderBy": 1
+      },
+      {
+        "name": "Description",
+        "dataType": "string",
+        "isSearchQuery": true,
+        "orderBy": 2
+      }
+    ],
+    "imports": [
+      
+    ],
+    "namespace": "CreditCardValidation.Domain.CreditCardStatusAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardStatusAggregate",
+    "inheritance": []
+  },
+  "builder": {
+    "name": "CreditCardStatusBuilder",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Domain.CreditCardStatusAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardStatusAggregate"
+  },
+  "unitOfWork": {
+    "name": "ICreditCardStatusUnitOfWork",
+    "properties": [
+    ],
+    "imports": [],
+    "namespace": "CreditCardValidation.Domain.CreditCardStatusAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardStatusAggregate"
+  },
+  "unitOfWorkImpl": {
+    "name": "CreditCardStatusUnitOfWork",
+    "properties": [
+    ],
+    "imports": [],
+    "namespace": "CreditCardValidation.Infrastructure.Implementations.CreditCardValidation.Repositories.CreditCardStatuses",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Infrastructure/Implementations/CreditCardValidation/Repositories/CreditCardStatuses"
+  },
+  "repository": {
+    "name": "ICreditCardStatusRepository",
+    "properties": [
+    ],
+    "imports": ["System", "SharedKernel.Interfaces"],
+    "namespace": "CreditCardValidation.Domain.CreditCardStatusAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardStatusAggregate"
+  },
+  "queryParams": {
+    "name": "CreditCardStatusQueryParams",
+    "properties": [
+    ],
+    "imports": [
+      "SharedKernel.Models"
+    ],
+    "namespace": "CreditCardValidation.Domain.CreditCardStatusAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardStatusAggregate",
+    "inheritance": ["QueryParams"]
+  },
+  "behaviour": {
+    "name": "CreditCardStatusBehaviour",
+    "properties": [
+    ],
+    "imports": [
+    ],
+    "namespace": "CreditCardValidation.Domain.CreditCardStatusAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardStatusAggregate"
+  },
+  "dIConfig": {
+    "name": "CreditCardStatusDIConfig",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.API.Configurations.DIConfig.CreditCardStatuses",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.API/Configurations/DIConfig/CreditCardStatuses"
+  },
+  "mappingProfile": {
+    "name": "CreditCardStatusMappingProfile",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Application.Mappings",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Application/Mappings"
+  },
+  "configuration": {
+    "name": "CreditCardStatusConfiguration",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Persistence.Configurations",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Persistence/Configurations"
+  },
+  "dBContext": {
+    "name": "CreditCardValidationDBContexts",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Persistence.Contexts",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Persistence/Contexts"
+  },
+  "repositoryImpl": {
+    "name": "CreditCardStatusRepository",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Infrastructure.Implementations.CreditCardValidation.Repositories.CreditCardStatuses",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Infrastructure/Implementations/CreditCardValidation/Repositories/CreditCardStatuses"
+  },
+  "controller": {
+    "name": "CreditCardStatusController",
+    "enumNamespace": "CreditCardValidation.API.Enums",
+    "properties": [
+    ],
+    "imports": [
+    ],
+    "namespace": "CreditCardValidation.API.Controllers",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.API/Controllers"
+  },
+  "dTOs": [
+    {
+      "name": "CreditCardStatusDTO",
+      "type": 0,
+      "properties": [
+        {
+          "name": "Id",
+          "dataType": "Guid",
+          "mapping": "Id"
+        },
+        {
+          "name": "Status",
+          "dataType": "string",
+          "mapping": "Status",
+          "isSearchQuery": true,
+          "orderBy": 1
+        },
+        {
+          "name": "Description",
+          "mapping": "Description",
+          "dataType": "string",
+          "isSearchQuery": true,
+          "orderBy": 2
+        }
+      ],
+      "imports": [
+        "System",
+        "SharedKernel.Interfaces"
+      ],
+      "namespace": "CreditCardValidation.Common.Models.CreditCardStatuses",
+      "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Common/Models/CreditCardStatuses",
+      "inheritance": ["IDTO"]
+    },
+    {
+      "name": "CreditCardStatusInsertDTO",
+      "type": 1,
+      "properties": [
+        {
+          "name": "Status",
+          "dataType": "string",
+          "mapping": "Status",
+          "isSearchQuery": true,
+          "orderBy": 1
+        },
+        {
+          "name": "Description",
+          "mapping": "Description",
+          "dataType": "string",
+          "isSearchQuery": true,
+          "orderBy": 2
+        }
+      ],
+      "imports": [
+        "System",
+        "SharedKernel.Interfaces"
+      ],
+      "namespace": "CreditCardValidation.Common.Models.CreditCardStatuses",
+      "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Common/Models/CreditCardStatuses",
+      "inheritance": ["ICreateDTO"]
+    },
+    {
+      "name": "CreditCardStatusUpdateDTO",
+      "type": 2,
+      "properties": [
+        {
+          "name": "Status",
+          "dataType": "string",
+          "mapping": "Status",
+          "isSearchQuery": true,
+          "orderBy": 1
+        },
+        {
+          "name": "Description",
+          "mapping": "Description",
+          "dataType": "string",
+          "isSearchQuery": true,
+          "orderBy": 2
+        }
+      ],
+      "imports": [
+        "System",
+        "SharedKernel.Interfaces"
+      ],
+      "namespace": "CreditCardValidation.Common.Models.CreditCardStatuses",
+      "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Common/Models/CreditCardStatuses",
+      "inheritance": ["IUpdateDTO"]
+    }
+  ]
+}
