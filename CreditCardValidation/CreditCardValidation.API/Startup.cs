@@ -112,7 +112,7 @@ namespace CreditCardValidation.API
                     {
                         Title = "Credit Card Validation API",
                         Version = "1",
-                        Description = "This is our Credit Card Validation API.",
+                        Description = "This is Shift Tech Credit Card Validation API.",
                         Contact =  new OpenApiContact()
                         {
                             Email = "mihendricks1@gmail.com",

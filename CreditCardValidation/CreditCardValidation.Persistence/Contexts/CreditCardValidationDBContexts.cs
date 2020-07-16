@@ -23,6 +23,7 @@ namespace CreditCardValidation.Persistence.Contexts {
       modelBuilder.ApplyConfiguration(new TestConfiguration());
       modelBuilder.ApplyConfiguration(new CreditCardStatusConfiguration());
       modelBuilder.ApplyConfiguration(new CreditCardProviderConfiguration());
+      modelBuilder.ApplyConfiguration(new CreditCardConfiguration());
       base.OnModelCreating(modelBuilder);
     }
   }
