@@ -25,6 +25,7 @@ namespace Application.Services
         { "PhoneNumber", new PropertyMappingValue(new List<string>() {"PhoneNumber"})},
         { "Status", new PropertyMappingValue(new List<string>() {"Status"})},
         { "Description", new PropertyMappingValue(new List<string>() {"Description"})},
+        { "No", new PropertyMappingValue(new List<string>() {"No"})},
         { "TestNames", new PropertyMappingValue(new List<string>() { "Name", "LastName"})},
         { "TestAge", new PropertyMappingValue(new List<string>() { "BirthDate"}, revert: true)},
         { "TestPhoneNumber", new PropertyMappingValue(new List<string>() {"PhoneNumber"})},
