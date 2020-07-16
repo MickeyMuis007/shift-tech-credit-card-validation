@@ -6,9 +6,11 @@ using SharedKernel.Interfaces;
 using CreditCardValidation.Common.Models.TestModels;
 using CreditCardValidation.Common.Models.CreditCardStatuses;
 using CreditCardValidation.Common.Models.CreditCardProviders;
+using CreditCardValidation.Common.Models.CreditCards;
 using CreditCardValidation.Domain.TestAggregate;
 using CreditCardValidation.Domain.CreditCardStatusAggregate;
 using CreditCardValidation.Domain.CreditCardProviderAggregate;
+using CreditCardValidation.Domain.CreditCardAggregate;
 
 namespace Application.Services
 {
@@ -39,6 +41,7 @@ namespace Application.Services
       _propertyMappings.Add(new PropertyMapping<TestDTO, Test>(_teacherPropertyMapping));
       _propertyMappings.Add(new PropertyMapping<CreditCardStatusDTO, CreditCardStatus>(_teacherPropertyMapping));
       _propertyMappings.Add(new PropertyMapping<CreditCardProviderDTO, CreditCardProvider>(_teacherPropertyMapping));
+      _propertyMappings.Add(new PropertyMapping<CreditCardDTO, CreditCard>(_teacherPropertyMapping));
     }
 
 
