@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using CreditCardValidation.Domain.CreditCardAggregate;
 using CreditCardValidation.Persistence.Contexts;
 using CreditCardValidation.Common.Models.CreditCards;
@@ -23,7 +25,8 @@ namespace CreditCardValidation.Infrastructure.Implementations.CreditCardValidati
 		{
 			var searchQuery = queryParams?.SearchQuery?.Trim();
 			var creditCardsQueryable = _db.CreditCards.Where(t =>
-				t.No.Contains(searchQuery ?? t.No)
+				t.No.Contains(searchQuery ?? t.No) &&
+				t.CreditCardStatusId == (queryParams.CreditCardStatusId ?? t.CreditCardStatusId)
 			);
 
 			if (!string.IsNullOrWhiteSpace(queryParams.OrderBy))
@@ -39,6 +42,27 @@ namespace CreditCardValidation.Infrastructure.Implementations.CreditCardValidati
 			var creditCards = await PagedList<CreditCard>.Create(creditCardsQueryable, queryParams.PageNumber, queryParams.PageSize);
 			return creditCards;
 			
+		}
+
+		public IEnumerable<CreditCard> Get5CreditCardsToProcess()
+		{
+			var issuedStatusId = _db.CreditCardStatuses.FirstOrDefault(t => t.Status == "Issued")?.Id;
+			var processedStatus = _db.CreditCardStatuses.FirstOrDefault(t => t.Status == "Processed");
+
+			var creditCards = _db.CreditCards.Where(t => t.CreditCardStatusId == issuedStatusId).Take(5);
+
+			var builder = new CreditCardBuilder(null, null);
+			var list = new List<CreditCard>();
+
+			foreach (CreditCard creditCard in creditCards)
+			{
+				_db.Entry(creditCard).State = EntityState.Detached;
+				if (processedStatus != null) {
+					list.Add(builder.Copy(creditCard).SetCreditCardStatusId(processedStatus.Id).Build());
+				}
+			}
+
+			return list;
 		}
 
 		public bool Exists(Guid id)

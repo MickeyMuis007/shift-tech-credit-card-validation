@@ -26,6 +26,13 @@ namespace CreditCardValidation.Domain.CreditCardAggregate
 			var  pagedList = PagedList<CreditCardDTO>.Create(creditCardDTOList, creditCardList.TotalCount, creditCardList.CurrentPage, creditCardList.PageSize);
 			return pagedList;
 		}
+
+		public IEnumerable<CreditCardDTO> Get5CreditCardsToProcess()
+		{
+			var creditCards = _unitOfWork.CreditCardRepository.Get5CreditCardsToProcess();
+			var dtos = _mapper.Map<IEnumerable<CreditCardDTO>>(creditCards);
+			return dtos;
+		}
 		public async Task<CreditCardDTO> GetById(Guid id)
 		{
 			var creditCard = await _unitOfWork.CreditCardRepository.GetById(id);

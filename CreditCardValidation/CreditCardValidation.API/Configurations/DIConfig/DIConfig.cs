@@ -5,6 +5,7 @@ using CreditCardValidation.API.Configurations.DIConfig.CreditCardProviders;
 using CreditCardValidation.API.Configurations.DIConfig.CreditCards;
 using SharedKernel.Interfaces;
 using Application.Services;
+using CreditCardValidation.Application.Workers;
 
 
 namespace CreditCardValidation.API.Configurations.DIConfig
@@ -21,6 +22,7 @@ namespace CreditCardValidation.API.Configurations.DIConfig
       CreditCardStatusDIConfig.Configure(services);
       CreditCardProviderDIConfig.Configure(services);
       CreditCardDIConfig.Configure(services);
+      services.AddHostedService<ProcessCreditCard>();
     }
 
   }
