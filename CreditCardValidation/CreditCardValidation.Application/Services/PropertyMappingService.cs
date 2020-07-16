@@ -19,12 +19,18 @@ namespace Application.Services
       new Dictionary<string, PropertyMappingValue>(StringComparer.OrdinalIgnoreCase)
       {
         { "Id", new PropertyMappingValue(new List<string>() { "Id" })},
-        { "Name", new PropertyMappingValue(new List<string>() { "Name", "LastName"})},
-        { "Age", new PropertyMappingValue(new List<string>() { "BirthDate"}, revert: true)},
+        { "Code", new PropertyMappingValue(new List<string>() { "Code"})},
+        { "Name", new PropertyMappingValue(new List<string>() { "Name"})},
+        { "LastName", new PropertyMappingValue(new List<string>() { "LastName"})},
         { "PhoneNumber", new PropertyMappingValue(new List<string>() {"PhoneNumber"})},
         { "Status", new PropertyMappingValue(new List<string>() {"Status"})},
         { "Description", new PropertyMappingValue(new List<string>() {"Description"})},
-        { "Code", new PropertyMappingValue(new List<string>() {"Code"})}
+        { "TestNames", new PropertyMappingValue(new List<string>() { "Name", "LastName"})},
+        { "TestAge", new PropertyMappingValue(new List<string>() { "BirthDate"}, revert: true)},
+        { "TestPhoneNumber", new PropertyMappingValue(new List<string>() {"PhoneNumber"})},
+        { "CreditCardStatusNames", new PropertyMappingValue(new List<string>() {"Status", "Description"})},
+        { "CreditCardProviderNames", new PropertyMappingValue(new List<string>() { "Name", "Code"})},
+        { "CreditCardProviderCode", new PropertyMappingValue(new List<string>() {"Code"})}
       };
 
     public PropertyMappingService() {
