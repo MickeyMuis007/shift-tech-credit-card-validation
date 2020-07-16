@@ -10,6 +10,7 @@ namespace CreditCardValidation.API.Configurations.DIConfig {
       services.AddAutoMapper(cfg => {
         cfg.AddProfile<TestMappingProfile>();
         cfg.AddProfile<CreditCardStatusMappingProfile>();
+        cfg.AddProfile<CreditCardProviderMappingProfile>();
       },typeof(Startup));
     }
   }

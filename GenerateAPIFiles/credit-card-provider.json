@@ -1,0 +1,254 @@
+{
+  "domain": {
+    "name": "CreditCardProvider",
+    "idDataType": "Guid",
+    "listName": "CreditCardProviders",
+    "isAggregateRoot": true,
+    "properties": [
+      {
+        "name": "Id",
+        "dataType": "Guid"
+      },
+      {
+        "name": "Name",
+        "dataType": "string",
+        "isSearchQuery": true,
+        "orderBy": 1
+      },
+      {
+        "name": "Code",
+        "dataType": "string",
+        "isSearchQuery": true,
+        "orderBy": 2
+      },
+      {
+        "name": "StartsWith",
+        "dataType": "string"
+      },
+      {
+        "name": "Length",
+        "dataType": "string"
+      }
+    ],
+    "imports": [
+      
+    ],
+    "namespace": "CreditCardValidation.Domain.CreditCardProviderAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardProviderAggregate",
+    "inheritance": []
+  },
+  "builder": {
+    "name": "CreditCardProviderBuilder",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Domain.CreditCardProviderAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardProviderAggregate"
+  },
+  "unitOfWork": {
+    "name": "ICreditCardProviderUnitOfWork",
+    "properties": [
+    ],
+    "imports": [],
+    "namespace": "CreditCardValidation.Domain.CreditCardProviderAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardProviderAggregate"
+  },
+  "unitOfWorkImpl": {
+    "name": "CreditCardProviderUnitOfWork",
+    "properties": [
+    ],
+    "imports": [],
+    "namespace": "CreditCardValidation.Infrastructure.Implementations.CreditCardValidation.Repositories.CreditCardProviders",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Infrastructure/Implementations/CreditCardValidation/Repositories/CreditCardProviders"
+  },
+  "repository": {
+    "name": "ICreditCardProviderRepository",
+    "properties": [
+    ],
+    "imports": [],
+    "namespace": "CreditCardValidation.Domain.CreditCardProviderAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardProviderAggregate"
+  },
+  "queryParams": {
+    "name": "CreditCardProviderQueryParams",
+    "properties": [
+    ],
+    "imports": [
+      "SharedKernel.Models"
+    ],
+    "namespace": "CreditCardValidation.Domain.CreditCardProviderAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardProviderAggregate",
+    "inheritance": ["QueryParams"]
+  },
+  "behaviour": {
+    "name": "CreditCardProviderBehaviour",
+    "properties": [
+    ],
+    "imports": [
+    ],
+    "namespace": "CreditCardValidation.Domain.CreditCardProviderAggregate",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Domain/CreditCardProviderAggregate"
+  },
+  "dIConfig": {
+    "name": "CreditCardProviderDIConfig",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.API.Configurations.DIConfig.CreditCardProviders",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.API/Configurations/DIConfig/CreditCardProviders"
+  },
+  "mappingProfile": {
+    "name": "CreditCardProviderMappingProfile",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Application.Mappings",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Application/Mappings"
+  },
+  "configuration": {
+    "name": "CreditCardProviderConfiguration",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Persistence.Configurations",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Persistence/Configurations"
+  },
+  "dBContext": {
+    "name": "CreditCardValidationDBContexts",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Persistence.Contexts",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Persistence/Contexts"
+  },
+  "repositoryImpl": {
+    "name": "CreditCardProviderRepository",
+    "properties": [],
+    "imports": [],
+    "namespace": "CreditCardValidation.Infrastructure.Implementations.CreditCardValidation.Repositories.CreditCardProviders",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Infrastructure/Implementations/CreditCardValidation/Repositories/CreditCardProviders"
+  },
+  "controller": {
+    "name": "CreditCardProviderController",
+    "enumNamespace": "CreditCardValidation.API.Enums",
+    "properties": [
+    ],
+    "imports": [
+    ],
+    "namespace": "CreditCardValidation.API.Controllers",
+    "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.API/Controllers"
+  },
+  "dTOs": [
+    {
+      "name": "CreditCardProviderDTO",
+      "type": 0,
+      "properties": [
+        {
+          "name": "Id",
+          "dataType": "Guid",
+          "mapping": "Id"
+        },
+        {
+          "name": "Name",
+          "dataType": "string",
+          "mapping": "Name",
+          "isSearchQuery": true,
+          "orderBy": 1
+        },
+        {
+          "name": "Code",
+          "dataType": "string",
+          "mapping": "Code",
+          "isSearchQuery": true,
+          "orderBy": 2
+        },
+        {
+          "name": "StartsWith",
+          "mapping": "StartsWith",
+          "dataType": "string"
+        },
+        {
+          "name": "Length",
+          "mapping": "Length",
+          "dataType": "string"
+        }
+      ],
+      "imports": [
+        "System",
+        "SharedKernel.Interfaces"
+      ],
+      "namespace": "CreditCardValidation.Common.Models.CreditCardProviders",
+      "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Common/Models/CreditCardProviders",
+      "inheritance": ["IDTO"]
+    },
+    {
+      "name": "CreditCardProviderInsertDTO",
+      "type": 1,
+      "properties": [
+        {
+          "name": "Name",
+          "dataType": "string",
+          "mapping": "Name",
+          "isSearchQuery": true,
+          "orderBy": 1
+        },
+        {
+          "name": "Code",
+          "dataType": "string",
+          "mapping": "Code",
+          "isSearchQuery": true,
+          "orderBy": 2
+        },
+        {
+          "name": "StartsWith",
+          "mapping": "StartsWith",
+          "dataType": "string"
+        },
+        {
+          "name": "Length",
+          "mapping": "Length",
+          "dataType": "string"
+        }
+      ],
+      "imports": [
+        "System",
+        "SharedKernel.Interfaces"
+      ],
+      "namespace": "CreditCardValidation.Common.Models.CreditCardProviders",
+      "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Common/Models/CreditCardProviders",
+      "inheritance": ["ICreateDTO"]
+    },
+    {
+      "name": "CreditCardProviderUpdateDTO",
+      "type": 2,
+      "properties": [
+        {
+          "name": "Name",
+          "dataType": "string",
+          "mapping": "Name",
+          "isSearchQuery": true,
+          "orderBy": 1
+        },
+        {
+          "name": "Code",
+          "dataType": "string",
+          "mapping": "Code",
+          "isSearchQuery": true,
+          "orderBy": 2
+        },
+        {
+          "name": "StartsWith",
+          "mapping": "StartsWith",
+          "dataType": "string"
+        },
+        {
+          "name": "Length",
+          "mapping": "Length",
+          "dataType": "string"
+        }
+      ],
+      "imports": [
+        "System",
+        "SharedKernel.Interfaces"
+      ],
+      "namespace": "CreditCardValidation.Common.Models.CreditCardProviders",
+      "path": "/home/michael/Dev/MyWork/Projects/shift-tech-credit-card-validation/CreditCardValidation/CreditCardValidation.Common/Models/CreditCardProviders",
+      "inheritance": ["IUpdateDTO"]
+    }
+  ]
+}
