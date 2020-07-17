@@ -1,0 +1,11 @@
+.main-container {
+  display: grid;
+  place-items: center;
+  height: 90vh;
+}
+
+.main-container > form {
+  min-width: 500px;
+  padding: 50px;
+  border-radius: 5%;
+}

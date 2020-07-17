@@ -1,17 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import './App.css';
-import './css/bootstrap.min.css'
-import {TestFormSchema} from "./TestFormSchema/TestFormSchema";
+import { MainNavBar } from "./Navbar/MainNavbar";
+import { TestFormSchema, CreditCard, CreditCardProvider, CreditCardStatus } from "./Admin";
+import { Login } from "./Login/Login";
+
+function Test() {
+  return (
+    <Container>
+      <h1>Hello World</h1>
+    </Container>
+  )
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <button className="btn btn-success">Hello</button>
-      </header>
-        <TestFormSchema />
-    </div>
+    <BrowserRouter>
+      <React.Fragment>
+        <MainNavBar />
+        <Container className="mt-2">
+          <Route exact path="/admin/test-form-schema" component={TestFormSchema} />
+          <Route exact path="/test" component={Test} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/admin/credit-card" component={CreditCard} />
+          <Route exact path="/admin/credit-card-status" component={CreditCardStatus} />
+          <Route exact path="/admin/credit-card-provider" component={CreditCardProvider} />
+        </Container>
+      </React.Fragment>
+    </BrowserRouter>
   );
 }
 
