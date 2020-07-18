@@ -1,30 +1,39 @@
 import React from "react";
-import { MDBContainer, MDBInput, MDBBtn } from 'mdbreact';
 import "./Login.css";
+import LoginForm from "./LoginForm";
 
 export class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-
+      email: "",
+      password: ""
     }
+    this.onFieldChange = this.onFieldChange.bind(this);
+    this.onLogin = this.onLogin.bind(this);
+  }
+
+  onFieldChange(event) {
+    event.preventDefault();
+    this.setState({
+      [event.target.name] : event.target.value
+    });
+
+    console.log("onFieldChange:", this.state);
+  }
+
+  onLogin(event) {
+    event.preventDefault();
+    this.login();
+  }
+
+  login() {
+    console.log("Login", this.state);
   }
 
   render() {
     return (
-      <MDBContainer className="main-container">
-        <form className="grey lighten-4">
-          <p className="h5 text-center mb-4">Login</p>
-          <div className="grey-text">
-            <MDBInput label="Type your email" icon="envelope" group type="email" validate error="wrong"
-              success="right" />
-            <MDBInput label="Type your password" icon="lock" group type="password" validate />
-          </div>
-          <div className="text-center">
-            <MDBBtn>Login</MDBBtn>
-          </div>
-        </form>
-      </MDBContainer>
+      <LoginForm formState={this.state} onFieldChange={this.onFieldChange} onLogin={this.onLogin} />
     )
   }
 }
