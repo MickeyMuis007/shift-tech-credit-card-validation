@@ -1,16 +1,21 @@
 import React from "react";
 import "./Login.css";
 import LoginForm from "./LoginForm";
+import { connect } from "react-redux";
+import { Constants } from "../Constants";
+import { withRouter } from "react-router-dom";
 
-export class Login extends React.Component {
-  constructor() {
-    super();
+
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: ""
     }
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onLogin = this.onLogin.bind(this);
+    mapDispatchToProps = mapDispatchToProps.bind(this);
   }
 
   onFieldChange(event) {
@@ -29,6 +34,7 @@ export class Login extends React.Component {
 
   login() {
     console.log("Login", this.state);
+    this.props.onLogin();
   }
 
   render() {
@@ -37,3 +43,18 @@ export class Login extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state = {}) {
+  return { }
+}
+
+function mapDispatchToProps(dispatch, props) {
+  return {
+    onLogin: () => {
+      dispatch({ type: Constants.login.AUTHENTICATE});
+      props.history.push("/");
+    }
+  }
+}
+
+export default withRouter((connect(mapStateToProps, mapDispatchToProps)(Login)));

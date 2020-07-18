@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import './App.css';
 import { MainNavBar } from "./Navbar/MainNavbar";
 import { TestFormSchema, CreditCard, CreditCardProvider, CreditCardStatus } from "./Admin";
-import { Login } from "./Login/Login";
+import Login from "./Login/Login";
 
 function Test() {
   return (
