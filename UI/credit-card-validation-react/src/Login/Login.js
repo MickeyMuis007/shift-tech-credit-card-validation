@@ -15,7 +15,6 @@ class Login extends React.Component {
     }
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onLogin = this.onLogin.bind(this);
-    mapDispatchToProps = mapDispatchToProps.bind(this);
   }
 
   onFieldChange(event) {
