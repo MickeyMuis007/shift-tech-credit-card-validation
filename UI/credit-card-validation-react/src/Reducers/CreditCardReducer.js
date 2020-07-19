@@ -1,12 +1,10 @@
 import { Constants } from "../Constants";
 import objectPath from "object-path";
 
-export function CreditCardReducer(state, action) {
+export async function CreditCardReducer(state, action) {
   objectPath.ensureExists(state, "creditCard", { list: [] });
 
   switch (action.type) {
-    case Constants.creditCard.GET_CREDIT_CARD:
-      return state.creditCard.list;
     case Constants.creditCard.ADD_CREDIT_CARD:
       return Object.assign({}, state, {
         creditCard: {

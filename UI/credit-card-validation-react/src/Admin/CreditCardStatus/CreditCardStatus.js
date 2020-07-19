@@ -1,53 +1,69 @@
 import React from "react";
-import { Container, Table, Card } from "react-bootstrap";
+import { connect } from "react-redux";
+import { Constants } from "../../Constants";
+import objectPath from "object-path";
+import { CreditCardStatusTable } from "./CreditCardStatusTable";
+import { LinearProgress } from "@material-ui/core"
 
-export class CreditCardStatus extends React.Component {
-  constructor() {
-    super();
+class CreditCardStatus extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
 
     }
   }
 
-  render() {
-    return (
-      <Container>
-        <Card className="main-card">
-          <Card.Header as="h5">Credit Card Status</Card.Header>
-          <Card.Body>
-            <Table striped bordered hover variant="dark">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td colSpan="2">Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </Table>
+  componentDidMount() {
+    this.props.onLoadCreditCardState();
+  }
 
-          </Card.Body>
-        </Card>
-      </Container>
+  render() {
+    console.log("Render Props:", this.props);
+    let creditCardStatusResults;
+    let fetchAll;
+    let loading;
+    if (objectPath.has(this.props, "creditCardStatus.fetchAll")) {
+      fetchAll = this.props.creditCardStatus.fetchAll;
+      loading = fetchAll.isFetching ? <LinearProgress /> : null;
+      creditCardStatusResults = this.props.creditCardStatus.fetchAll.results;
+      
+    } 
+
+
+    return (
+      <React.Fragment>
+        {loading}
+        <CreditCardStatusTable creditCardStatus={creditCardStatusResults} props={this.props}/>
+      </React.Fragment>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    creditCardStatus: { ...state.creditCardStatus }
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onReload: () => {
+      dispatch({ type: Constants.creditCardStatus.RELOAD, data: "Some data" });
+    },
+    onLoadCreditCardState: () => {
+      dispatch({ type: Constants.creditCardStatus.FETCH_ALL_REQUEST });
+      try {
+        fetch("http://localhost:6003/api/creditCardStatus")
+          .then(res => res.json())
+          .then(res => {
+            dispatch({ type: Constants.creditCardStatus.FETCH_ALL_SUCCESS, data: res });
+
+          });
+      } catch (err) {
+        dispatch({ type: Constants.creditCardStatus.FETCH_ALL_FAILURE, data: err });
+      }
+    }
+  }
+}
+
+export default connect(() => mapStateToProps, mapDispatchToProps)(CreditCardStatus);

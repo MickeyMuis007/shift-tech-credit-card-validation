@@ -37,6 +37,7 @@ class Login extends React.Component {
   }
 
   render() {
+    console.log("Login Render Props", this.props);
     return (
       <LoginForm formState={this.state} onFieldChange={this.onFieldChange} onLogin={this.onLogin} />
     )
@@ -44,7 +45,9 @@ class Login extends React.Component {
 }
 
 function mapStateToProps(state = {}) {
-  return { }
+  return {
+    login: state.login
+  };
 }
 
 function mapDispatchToProps(dispatch, props) {

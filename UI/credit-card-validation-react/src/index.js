@@ -13,7 +13,6 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 
 function reducer(state = {}, action) {
-  console.log("State before:", state);
   switch (caseSplit(action.type)) {
     case MainConstants.LOGIN:
       return Reducers.LoginReducer(state, action);

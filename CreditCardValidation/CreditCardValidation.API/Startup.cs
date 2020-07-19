@@ -80,9 +80,9 @@ namespace CreditCardValidation.API
                     };
                 });
 
-            services.AddCors(o => o.AddPolicy("AllowedCorsPolicy", 
+            services.AddCors(o => o.AddPolicy("ReactUICorsPolicy", 
                 builder => builder
-                    .WithOrigins("http://localhost:4203")
+                    .WithOrigins("http://localhost:3000")
                     .AllowAnyHeader()
                     .AllowAnyMethod()));
 
@@ -90,7 +90,7 @@ namespace CreditCardValidation.API
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                 .AddIdentityServerAuthentication(options => {
                     options.Authority = "http://localhost:5000";
-                    options.ApiName = "cms-api";
+                    options.ApiName = "ccv-api";
                     options.ApiSecret = "secret";
                     options.RequireHttpsMetadata = false;
                 });
@@ -135,6 +135,7 @@ namespace CreditCardValidation.API
             }
 
             // app.UseHttpsRedirection();
+            app.UseCors("ReactUICorsPolicy");
 
             app.UseSwagger();
             app.UseSwaggerUI(setupAction => {
