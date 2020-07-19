@@ -45,15 +45,20 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps, stateProps) {
+  console.log("Own Props:", ownProps);
+  console.log("Own stateProps:", stateProps);
+  console.log("Own dispatch:", dispatch);
   return {
     onReload: () => {
       dispatch({ type: Constants.creditCardStatus.RELOAD, data: "Some data" });
     },
-    onLoadCreditCardState: () => {
+    onLoadCreditCardState: (qry) => {
       dispatch({ type: Constants.creditCardStatus.FETCH_ALL_REQUEST });
       try {
-        fetch("http://localhost:6003/api/creditCardStatus")
+        const pageSize = qry && qry.pageSize ? qry.pageSize : 10;
+        const pageNumber = qry && qry.pageNumber ? qry.pageNumber : 1;
+        fetch(`http://localhost:6003/api/creditCardStatus?pageNumber=${pageNumber}&pageSize=${pageSize}`)
           .then(res => res.json())
           .then(res => {
             dispatch({ type: Constants.creditCardStatus.FETCH_ALL_SUCCESS, data: res });
@@ -66,4 +71,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(() => mapStateToProps, mapDispatchToProps)(CreditCardStatus);
+export default connect(mapStateToProps, mapDispatchToProps)(CreditCardStatus);

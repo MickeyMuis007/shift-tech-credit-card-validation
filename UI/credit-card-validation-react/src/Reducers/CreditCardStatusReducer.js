@@ -7,13 +7,18 @@ export function CreditCardStatusReducer(state = {
       isFetching: false,
       didInvalidate: false,
       results: []
+    },
+    pagination: {
+      pageNumber: 1,
+      pageSize: 10
     }
   }
 }, action) {
   try {
+    objectPath.ensureExists(state, "creditCardStatus.pagination", { pageNumber: 1, pageSize: 10 })
     switch (action.type) {
-      case Constants.creditCardStatus.GET_CREDIT_CARD_STATUS:
-        return state.creditCardStatus.list;
+      case Constants.creditCardStatus.SET_GRID_PAGINATION:
+        return paginationPagination(state, action);
       case Constants.creditCardStatus.RELOAD:
         return Object.assign({}, state, {
           creditCardStatus: {
@@ -65,16 +70,21 @@ function fetchAll(state, action) {
           error: action.data
         }
       });
+    default:
+      return state;
   }
 }
 
-// function getCreditCardStatus() {
-//   try {
-//     const response = fetch("http://localhost:6003/api/creditCardStatus").then(res => res.json());
-//     console.log("Credit Card Statuses", response);
-//     return response;
-//   } catch (err) {
-//     console.log(err);
-//     throw err;
-//   }
-// }
+function paginationPagination(state, action) {
+  const page = action.data && action.data.pageNumber ? action.data.pageNumber : state.creditCardStatus.pagination.pageNumber;
+  const pageSize = action.data && action.data.pageSize ? action.data.pageSize : state.creditCardStatus.pagination.pageSize;
+  return Object.assign({}, state, {
+    creditCardStatus: {
+      ...state.creditCardStatus,
+      pagination: {
+        pageNumber: page,
+        pageSize: pageSize
+      }
+    }
+  });
+}
