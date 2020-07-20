@@ -31,7 +31,6 @@ export function CreditCardStatusTable({ creditCardStatus, props }) {
 
   const onStatusSort = () => {
     const sortByCnt = sortCnt === 1 ? -1 : (1 + sortCnt);
-    console.log(sortByCnt);
     if (sortCnt === 1) setSortCnt(sortByCnt);
     else setSortCnt(sortByCnt);
 
