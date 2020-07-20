@@ -3,7 +3,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import './App.css';
 import { MainNavBar } from "./Navbar/MainNavbar";
-import { TestFormSchema, CreditCard, CreditCardProvider, CreditCardStatus, CreditCardStatusEdit } from "./Admin";
+import { CreditCard, CreditCardProvider, CreditCardStatus, CreditCardStatusEdit } from "./Admin";
+import { SpeedDailer, TestFormSchema } from "./RND";
 import Login from "./Login/Login";
 
 function Test() {
@@ -20,7 +21,8 @@ function App() {
       <React.Fragment>
         <MainNavBar />
         <Container className="mt-2">
-          <Route exact path="/admin/test-form-schema" component={TestFormSchema} />
+          <Route exact path="/rnd/test-form-schema" component={TestFormSchema} />
+          <Route exact path="/rnd/speed-dailer" component={SpeedDailer} />
           <Route exact path="/test" component={Test} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/admin/credit-card" component={CreditCard} />

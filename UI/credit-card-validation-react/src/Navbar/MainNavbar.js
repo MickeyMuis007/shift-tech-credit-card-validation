@@ -15,8 +15,10 @@ export function MainNavBar() {
             <LinkContainer to={"/admin/credit-card"}><NavDropdown.Item>Credit Cards</NavDropdown.Item></LinkContainer>
             <LinkContainer to={"/admin/credit-card-provider"}><NavDropdown.Item>Credit Card Providers</NavDropdown.Item></LinkContainer>
             <LinkContainer to={"/admin/credit-card-status"}><NavDropdown.Item>Credit Card Statuses</NavDropdown.Item></LinkContainer>
-            <NavDropdown.Divider />
-            <LinkContainer to={"/admin/test-form-schema"}><NavDropdown.Item>Test Form Schema</NavDropdown.Item></LinkContainer>
+          </NavDropdown>
+          <NavDropdown title="RND">
+            <LinkContainer to={"/rnd/test-form-schema"}><NavDropdown.Item>Test Form Schema</NavDropdown.Item></LinkContainer>
+            <LinkContainer to={"/rnd/speed-dailer"}><NavDropdown.Item>Speed Dailer</NavDropdown.Item></LinkContainer>
             <LinkContainer to={"/test"}><NavDropdown.Item>Test</NavDropdown.Item></LinkContainer>
           </NavDropdown>
         </Nav>

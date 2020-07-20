@@ -1,7 +1,6 @@
 
 import React from "react";
 import { Container, Table, Card } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
 import { MDBIcon } from "mdbreact";
 import { IconButton } from "@material-ui/core";
 import { Fab } from "@material-ui/core";
@@ -9,10 +8,14 @@ import { Cached, ArrowDropDown } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import MaterialPagination from "../Shared/MaterialPagination";
 import "./CreditCardStatusTable.css";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import DeleteModal from "../Shared/DeleteModal";
 
 export function CreditCardStatusTable({ creditCardStatus, props }) {
   let [sortCnt, setSortCnt] = React.useState(0);
+  const [open, setOpen ] = React.useState(false);
+  const [selectedRow, setSelectedRow ] = React.useState();
+  
   function onReload(qry, isSort) {
     if (!isSort) qry["sort"] = sortStatus[sortCnt];
     props.onLoadCreditCardState(qry);
@@ -40,11 +43,29 @@ export function CreditCardStatusTable({ creditCardStatus, props }) {
     onReload(qry, true);
   }
 
+  const onDeleteClick = (selectedRow) => {
+    setSelectedRow({
+      id: selectedRow.Id,
+      name: selectedRow.Status
+    });
+    setOpen(true);
+  }
+
+  const onClose = () => {
+    setOpen(false);
+  }  
+
+  const onDelete = (id) => {
+    console.log("Delete", id);
+    setOpen(false);
+  }
+
   const creditCardStatuses = creditCardStatus ? creditCardStatus.results : [];
   const metaData = creditCardStatus ? creditCardStatus.metaData : {};
   const pagination = Object.keys(metaData).length !== 0 ? <MaterialPagination reload={onReload} /> : null;
   return (
     <Container>
+      <DeleteModal open={open} onClose={onClose} selected={selectedRow} onDelete={onDelete}/>
       <Card className="main-card">
         <Card.Header as="h5" className="d-flex justify-content-between align-items-center">
           <span>Credit Card Status</span>
@@ -69,7 +90,7 @@ export function CreditCardStatusTable({ creditCardStatus, props }) {
               </tr>
             </thead>
             <tbody>
-              <CreditCardStatusRows creditCardStatuses={creditCardStatuses} />
+              <CreditCardStatusRows creditCardStatuses={creditCardStatuses} onDeleteClick={(onDeleteClick)} />
             </tbody>
           </Table>
 
@@ -80,13 +101,13 @@ export function CreditCardStatusTable({ creditCardStatus, props }) {
   );
 }
 
-function CreditCardStatusRow({ rowData }) {
+function CreditCardStatusRow({ rowData, onDeleteClick }) {
   return (
     <tr>
       <td>
         <Link to={"/admin/credit-card-status/edit/" + rowData.Id} className="text-light p-1" title="Edit"><MDBIcon icon="pencil-alt" /></Link>
         <Link to={"/admin/credit-card-status/view/" + rowData.Id} className="text-light p-1" title="View"><MDBIcon icon="eye" /></Link>
-        <Link to={"/admin/credit-card-status/view/" + rowData.Id} className="text-light p-1" title="Delete"><MDBIcon icon="trash-alt" /></Link>
+        <span style={{cursor: "pointer"}} onClick={() => onDeleteClick(rowData)} className="text-light p-1" title="Delete"><MDBIcon icon="trash-alt" /></span>
       </td>
       <td>{rowData.Status}</td>
       <td>{rowData.Description}</td>
@@ -94,6 +115,6 @@ function CreditCardStatusRow({ rowData }) {
   )
 }
 
-function CreditCardStatusRows({ creditCardStatuses }) {
-  return creditCardStatuses.map(t => <CreditCardStatusRow key={t.Id} rowData={t} />);
+function CreditCardStatusRows({ creditCardStatuses, onDeleteClick }) {
+  return creditCardStatuses.map(t => <CreditCardStatusRow key={t.Id} rowData={t} onDeleteClick={onDeleteClick} />);
 }
