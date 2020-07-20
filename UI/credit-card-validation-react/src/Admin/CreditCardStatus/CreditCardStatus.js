@@ -18,7 +18,6 @@ class CreditCardStatus extends React.Component {
   }
 
   render() {
-    console.log("Render Props:", this.props);
     let creditCardStatusResults;
     let fetchAll;
     let loading;
@@ -45,10 +44,7 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch, ownProps, stateProps) {
-  console.log("Own Props:", ownProps);
-  console.log("Own stateProps:", stateProps);
-  console.log("Own dispatch:", dispatch);
+function mapDispatchToProps(dispatch) {
   return {
     onReload: () => {
       dispatch({ type: Constants.creditCardStatus.RELOAD, data: "Some data" });
@@ -56,9 +52,10 @@ function mapDispatchToProps(dispatch, ownProps, stateProps) {
     onLoadCreditCardState: (qry) => {
       dispatch({ type: Constants.creditCardStatus.FETCH_ALL_REQUEST });
       try {
+        let sort = qry && qry.sort ? `&OrderBy=${qry.sort}` : "";
         const pageSize = qry && qry.pageSize ? qry.pageSize : 10;
         const pageNumber = qry && qry.pageNumber ? qry.pageNumber : 1;
-        fetch(`http://localhost:6003/api/creditCardStatus?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+        fetch(`http://localhost:6003/api/creditCardStatus?pageNumber=${pageNumber}&pageSize=${pageSize}${sort}`)
           .then(res => res.json())
           .then(res => {
             dispatch({ type: Constants.creditCardStatus.FETCH_ALL_SUCCESS, data: res });

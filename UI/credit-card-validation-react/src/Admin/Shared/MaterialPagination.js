@@ -12,7 +12,6 @@ export const PageConstants = {
 }
 
 const MaterialPagination = ({ pagination, setPagination, metaData, reload }) => {
-  console.log("Material Props:", reload);
   let [totalCount] = React.useState(metaData.totalCount);
   let [page, setPage] = React.useState(pagination.pageNumber - 1);
   let [rowsPerPage, setRowsPerPage] = React.useState(pagination.pageSize);
