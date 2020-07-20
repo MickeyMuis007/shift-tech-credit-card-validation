@@ -2,7 +2,7 @@ namespace SharedKernel.Models
 {
   public class QueryParams
   {
-    const int MAX_PAGE_SIZE = 20;
+    const int MAX_PAGE_SIZE = 100;
     private int _pageSize = 10;
 
     /// <summary>
