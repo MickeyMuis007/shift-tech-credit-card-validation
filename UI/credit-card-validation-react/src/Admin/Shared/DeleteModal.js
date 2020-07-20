@@ -5,7 +5,6 @@ import Fade from '@material-ui/core/Fade';
 import Button from "@material-ui/core/Button"
 
 export default function CreditCardStatusModal(props) {
-  console.log(props);
   const selectedItem = props.selected || {};
   return (
     <div>

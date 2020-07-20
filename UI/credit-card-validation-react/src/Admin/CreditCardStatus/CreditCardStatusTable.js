@@ -56,8 +56,8 @@ export function CreditCardStatusTable({ creditCardStatus, props }) {
   }  
 
   const onDelete = (id) => {
-    console.log("Delete", id);
     setOpen(false);
+    props.onDeleteCreditCardStatus(id);
   }
 
   const creditCardStatuses = creditCardStatus ? creditCardStatus.results : [];
@@ -106,7 +106,7 @@ function CreditCardStatusRow({ rowData, onDeleteClick }) {
     <tr>
       <td>
         <Link to={"/admin/credit-card-status/edit/" + rowData.Id} className="text-light p-1" title="Edit"><MDBIcon icon="pencil-alt" /></Link>
-        <Link to={"/admin/credit-card-status/view/" + rowData.Id} className="text-light p-1" title="View"><MDBIcon icon="eye" /></Link>
+        {/* <Link to={"/admin/credit-card-status/view/" + rowData.Id} className="text-light p-1" title="View"><MDBIcon icon="eye" /></Link> */}
         <span style={{cursor: "pointer"}} onClick={() => onDeleteClick(rowData)} className="text-light p-1" title="Delete"><MDBIcon icon="trash-alt" /></span>
       </td>
       <td>{rowData.Status}</td>

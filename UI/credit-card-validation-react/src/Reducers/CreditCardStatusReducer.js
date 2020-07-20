@@ -10,7 +10,8 @@ export function CreditCardStatusReducer(state = {
     },
     pagination: {
       pageNumber: 1,
-      pageSize: 10
+      pageSize: 10,
+      totalCount: 0
     }
   }
 }, action) {
@@ -96,12 +97,14 @@ function fetchAll(state, action) {
 function paginationPagination(state, action) {
   const page = action.data && action.data.pageNumber ? action.data.pageNumber : state.creditCardStatus.pagination.pageNumber;
   const pageSize = action.data && action.data.pageSize ? action.data.pageSize : state.creditCardStatus.pagination.pageSize;
+  const totalCount = action.data && action.data.totalCount ? action.data.totalCount : 0;
   return Object.assign({}, state, {
     creditCardStatus: {
       ...state.creditCardStatus,
       pagination: {
         pageNumber: page,
-        pageSize: pageSize
+        pageSize: pageSize,
+        totalCount: totalCount
       }
     }
   });

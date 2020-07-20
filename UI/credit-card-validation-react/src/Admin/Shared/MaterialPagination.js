@@ -3,64 +3,70 @@ import { TablePagination } from "@material-ui/core";
 import { connect } from "react-redux";
 import { Constants } from "../../Constants";
 
-export const PageConstants = {
-  FIRST: "FIRST",
-  PREVIOUS: "PREVIOUS",
-  CURRENT: "CURRENT",
-  NEXT: "NEXT",
-  LAST: "LAST"
-}
+class MaterialPagination extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+   
+    }
 
-const MaterialPagination = ({ pagination, setPagination, metaData, reload }) => {
-  let [totalCount] = React.useState(metaData.totalCount);
-  let [page, setPage] = React.useState(pagination.pageNumber - 1);
-  let [rowsPerPage, setRowsPerPage] = React.useState(pagination.pageSize);
+    this.handleChangePage = this.handleChangePage.bind(this);
+    this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
+  }
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  handleChangePage = (event, newPage) => {
     const qry = {
       pageNumber: newPage + 1,
-      pageSize: pagination.pageSize
+      pageSize: this.props.pagination.pageSize
     };
-    setPagination(qry);
-    reload(qry);
+    this.props.reload(qry);
+
+    this.props.setPagination({
+      ...this.props.pagination,
+      pageNumber: newPage + 1
+    });
   };
 
-  const handleChangeRowsPerPage1 = (event) => {
+  handleChangeRowsPerPage = (event) => {
     const pageSize = event.target.value;
-    setRowsPerPage(event.target.value);
     const qry = {
-      pageNumber: pagination.pageNumber,
+      pageNumber: this.props.pagination.pageNumber,
       pageSize: pageSize
     };
-    setPagination(qry);
-    reload(qry);
+    this.props.reload(qry);
+
+    this.props.setPagination({
+      ...this.props.pagination,
+      pageSize: pageSize
+    });
   };
 
-  return (
-    <TablePagination
-      component="div"
-      count={totalCount}
-      page={page}
-      onChangePage={handleChangePage}
-      rowsPerPage={rowsPerPage}
-      onChangeRowsPerPage={handleChangeRowsPerPage1}
-      rowsPerPageOptions={[5, 10, 25, 50, 100]}
-    />
-  )
+  render() {
+    return (
+      <TablePagination
+        component="div"
+        count={this.props.pagination.totalCount || 0}
+        page={this.props.pagination.pageNumber - 1}
+        onChangePage={this.handleChangePage}
+        rowsPerPage={this.props.pagination.pageSize}
+        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+        rowsPerPageOptions={[5, 10, 25, 50, 100]}
+      />
+    )
+  }
 }
+
 
 function mapToStateProp(state) {
   return {
-    pagination: {...state.creditCardStatus.pagination},
-    metaData: {...state.creditCardStatus.fetchAll.results.metaData}
+    pagination: { ...state.creditCardStatus.pagination }
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     setPagination: (pagination) => {
-      dispatch({ type: Constants.creditCardStatus.SET_GRID_PAGINATION, data: pagination});
+      dispatch({ type: Constants.creditCardStatus.SET_GRID_PAGINATION, data: pagination });
     }
   }
 }
