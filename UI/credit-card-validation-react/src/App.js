@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import './App.css';
 import { MainNavBar } from "./Navbar/MainNavbar";
-import { TestFormSchema, CreditCard, CreditCardProvider, CreditCardStatus } from "./Admin";
+import { TestFormSchema, CreditCard, CreditCardProvider, CreditCardStatus, CreditCardStatusEdit } from "./Admin";
 import Login from "./Login/Login";
 
 function Test() {
@@ -25,6 +25,8 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/admin/credit-card" component={CreditCard} />
           <Route exact path="/admin/credit-card-status" component={CreditCardStatus} />
+          <Route exact path="/admin/credit-card-status/edit/:id" component={CreditCardStatusEdit} />
+          <Route exact path="/admin/credit-card-status/edit" component={CreditCardStatusEdit} />
           <Route exact path="/admin/credit-card-provider" component={CreditCardProvider} />
         </Container>
       </React.Fragment>

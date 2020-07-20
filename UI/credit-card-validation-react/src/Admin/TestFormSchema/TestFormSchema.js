@@ -49,7 +49,7 @@ export class TestFormSchema extends React.Component {
         <MDBBreadcrumbItem>Library</MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>Data</MDBBreadcrumbItem>
       </MDBBreadcrumb>
-      <Form schema={this.state.schema} onSubmit={console.log} showErrorList={false} />
+      <Form schema={this.state.schema} noHtml5Validate onSubmit={(event) => {console.log(event.target.value);}} showErrorList={false} />
     </React.Fragment>
     )
   }

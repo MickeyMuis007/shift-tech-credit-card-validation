@@ -9,6 +9,7 @@ import { Cached, ArrowDropDown } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import MaterialPagination from "../Shared/MaterialPagination";
 import "./CreditCardStatusTable.css";
+import { Link } from "react-router-dom"
 
 export function CreditCardStatusTable({ creditCardStatus, props }) {
   let [sortCnt, setSortCnt] = React.useState(0);
@@ -45,14 +46,20 @@ export function CreditCardStatusTable({ creditCardStatus, props }) {
   return (
     <Container>
       <Card className="main-card">
-        <Card.Header as="h5">Credit Card Status</Card.Header>
+        <Card.Header as="h5" className="d-flex justify-content-between align-items-center">
+          <span>Credit Card Status</span>
+          <span className="pull-right">
+            <IconButton aria-label="reload" title="Reload credit card statuses" onClick={() => onReload(props.creditCardStatus.pagination)} style={{ outline: "none" }}>
+              <Cached />
+            </IconButton>
+            <Link to={"/admin/credit-card-status/edit"}>
+              <Fab color="primary" size="small" aria-label="add" title="Add credit card status" style={{ outline: "none" }}>
+                <AddIcon />
+              </Fab>
+            </Link>
+          </span>
+        </Card.Header>
         <Card.Body>
-          <IconButton aria-label="reload" title="Reload credit card statuses" onClick={() => onReload(props.creditCardStatus.pagination)} style={{ outline: "none" }}>
-            <Cached />
-          </IconButton>
-          <Fab color="primary" size="small" aria-label="add" title="Add credit card status" style={{ outline: "none" }}>
-            <AddIcon />
-          </Fab>
           <Table striped bordered hover variant="dark">
             <thead>
               <tr>
@@ -77,9 +84,9 @@ function CreditCardStatusRow({ rowData }) {
   return (
     <tr>
       <td>
-        <LinkContainer to={"/admin/credit-card-status/edit/" + rowData.Id}><a href className="text-light p-1" title="Edit"><MDBIcon icon="pencil-alt" /></a></LinkContainer>
-        <LinkContainer to={"/admin/credit-card-status/view/" + rowData.Id}><a href className="text-light p-1" title="View"><MDBIcon icon="eye" /></a></LinkContainer>
-        <LinkContainer to={"/admin/credit-card-status/view/" + rowData.Id}><a href className="text-light p-1" title="Delete"><MDBIcon icon="trash-alt" /></a></LinkContainer>
+        <Link to={"/admin/credit-card-status/edit/" + rowData.Id} className="text-light p-1" title="Edit"><MDBIcon icon="pencil-alt" /></Link>
+        <Link to={"/admin/credit-card-status/view/" + rowData.Id} className="text-light p-1" title="View"><MDBIcon icon="eye" /></Link>
+        <Link to={"/admin/credit-card-status/view/" + rowData.Id} className="text-light p-1" title="Delete"><MDBIcon icon="trash-alt" /></Link>
       </td>
       <td>{rowData.Status}</td>
       <td>{rowData.Description}</td>
