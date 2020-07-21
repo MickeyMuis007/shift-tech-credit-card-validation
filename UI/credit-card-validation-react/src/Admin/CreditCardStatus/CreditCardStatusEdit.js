@@ -14,7 +14,7 @@ class CreditCardStatusEdit extends React.Component {
         "title": "Edit Credit Card Status",
         "type": "object",
         "required": [
-          // "status"
+          "status"
         ],
         "properties": {
           "status": {
