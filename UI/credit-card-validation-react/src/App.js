@@ -9,6 +9,7 @@ import {
 } from "./Admin";
 import { SpeedDailer, TestFormSchema } from "./RND";
 import Login from "./Login/Login";
+import Home from "./Home/Home";
 
 function Test() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <React.Fragment>
         <MainNavBar />
         <Container className="mt-2">
+          <Route exact path="/" component={Home} />
           <Route exact path="/rnd/test-form-schema" component={TestFormSchema} />
           <Route exact path="/rnd/speed-dailer" component={SpeedDailer} />
           <Route exact path="/test" component={Test} />
