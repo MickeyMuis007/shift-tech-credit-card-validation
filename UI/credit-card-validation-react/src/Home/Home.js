@@ -10,6 +10,8 @@ import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import objectPath from "object-path";
+import Alert from "@material-ui/lab/Alert";
+import Collapse from '@material-ui/core/Collapse';
 
 class Home extends React.Component {
   constructor(props) {
@@ -17,12 +19,16 @@ class Home extends React.Component {
 
     this.state = {
       provider: "",
-      no: ""
+      no: "",
+      alertSuccessOpen: false,
+      alertErrorOpen: false
     }
 
     this.onProviderChange = this.onProviderChange.bind(this);
     this.onCreditCardNoChange = this.onCreditCardNoChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onAlertErrorClose = this.onAlertErrorClose.bind(this);
+    this.onAlertSuccessClose = this.onAlertSuccessClose.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +51,32 @@ class Home extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     console.log(this.state);
+    this.setState({
+      no: "",
+      provider: ""
+    });
+
+    if (this.state.no === "1") {
+      this.setState({
+        alertSuccessOpen: true
+      })
+    } else {
+      this.setState({
+        alertErrorOpen: true
+      })
+    }
+  }
+
+  onAlertSuccessClose() {
+    this.setState({
+      alertSuccessOpen: false
+    })
+  }
+
+  onAlertErrorClose() {
+    this.setState({
+      alertErrorOpen: false
+    })
   }
 
   render() {
@@ -55,9 +87,15 @@ class Home extends React.Component {
 
     return (
       <React.Fragment>
+        <Collapse in={this.state.alertSuccessOpen}>
+          <Alert onClose={this.onAlertSuccessClose}>This is a success alert — check it out!</Alert>
+        </Collapse>
+        <Collapse in={this.state.alertErrorOpen}>
+          <Alert severity="error" onClose={this.onAlertErrorClose}>This is a success alert — check it out!</Alert>
+        </Collapse>
         <Form onSubmit={this.onSubmit}>
           <Container className="container-center-abs">
-            <TextField className="mx-1" required variant="outlined" label="Enter Credit Card No?" name="no"
+            <TextField type="number" className="mx-1" required variant="outlined" label="Enter Credit Card No?" name="no"
               onChange={this.onCreditCardNoChange} value={this.state.no} />
             <FormControl className="mx-1" variant="outlined">
               <InputLabel htmlFor="provider">Provider</InputLabel>
@@ -70,7 +108,7 @@ class Home extends React.Component {
                 {menuItems}
               </Select>
             </FormControl>
-            <Fab variant="extended" type="submit" style={{outline: "none"}}>
+            <Fab variant="extended" type="submit" style={{ outline: "none" }}>
               Validate <SendIcon className="ml-2" />
             </Fab>
           </Container>
