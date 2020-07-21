@@ -1,53 +1,101 @@
 import React from "react";
-import { Container, Table, Card } from "react-bootstrap";
+import { connect } from "react-redux";
+import { Constants } from "../../Constants";
+import objectPath from "object-path";
+import { CreditCardTable } from "./CreditCardTable";
+import { LinearProgress } from "@material-ui/core"
 
-export class CreditCard extends React.Component {
-  constructor() {
-    super();
+class CreditCard extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
 
     }
   }
 
-  render() {
-    return (
-      <Container>
-        <Card className="main-card">
-          <Card.Header as="h5">Credit Card</Card.Header>
-          <Card.Body>
-            <Table striped bordered hover variant="dark">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td colSpan="2">Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </Table>
+  componentDidMount() {
+    this.props.onLoadCreditCard();
+  }
 
-          </Card.Body>
-        </Card>
-      </Container>
+  render() {
+    let fetchAll;
+    let loading;
+    if (objectPath.has(this.props, "creditCard.fetchAll")) {
+      fetchAll = this.props.creditCard.fetchAll;
+      loading = fetchAll.isFetching ? <LinearProgress /> : null;
+    }
+
+
+    return (
+      <React.Fragment>
+        {loading}
+        <CreditCardTable props={{...this.props}} />
+      </React.Fragment>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    creditCard: { ...state.creditCard },
+    pagination: objectPath.get(state, "creditCard.pagination")
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  const restUrl = `${Constants.api.HOST}/creditCard`;
+  const loadCreditCard = (qry) => {
+    dispatch({ type: Constants.creditCard.FETCH_ALL_REQUEST });
+    try {
+      let sort = qry && qry.sort ? `&OrderBy=${qry.sort}` : "";
+      const pageSize = qry && qry.pageSize ? qry.pageSize : 10;
+      const pageNumber = qry && qry.pageNumber ? qry.pageNumber : 1;
+      fetch(`${restUrl}?pageNumber=${pageNumber}&pageSize=${pageSize}${sort}`)
+        .then(res => res.json())
+        .then(res => {
+          dispatch({ type: Constants.creditCard.FETCH_ALL_SUCCESS, data: res });
+          dispatch({
+            type: Constants.creditCard.SET_GRID_PAGINATION, data: {
+              pageSize: res.metaData.pageSize,
+              pageNumber: res.metaData.currentPage,
+              totalCount: res.metaData.totalCount
+            }
+          })
+
+        });
+    } catch (err) {
+      dispatch({ type: Constants.creditCard.FETCH_ALL_FAILURE, data: err });
+    }
+  }
+  return {
+    onReload: (qry) => {
+      loadCreditCard(qry)
+    },
+    onLoadCreditCard: (qry) => {
+      loadCreditCard(qry)
+    },
+    onDeleteCreditCard: (id) => {
+      dispatch({ type: Constants.creditCard.DELETE_SINGLE_REQUEST });
+      try {
+        fetch(`${restUrl}/${id}`, { method: 'DELETE' })
+          .then((res) => res.status)
+          .then((res) => {
+            dispatch({ type: Constants.creditCard.DELETE_SINGLE_SUCCESS, data: res });
+            loadCreditCard({
+              pageNumber: 1, 
+              pageSize: 10
+            });
+          }).catch((err) => {
+            dispatch({ type: Constants.creditCard.DELETE_SINGLE_FAILURE, data: err });
+          })
+      } catch (err) {
+        dispatch({ type: Constants.creditCard.DELETE_SINGLE_FAILURE, data: err });
+      }
+    },
+    setPagination: (pagination) => {
+      dispatch({ type: Constants.creditCard.SET_GRID_PAGINATION, data: pagination });
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreditCard);

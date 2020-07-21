@@ -1,4 +1,5 @@
-import { CreditCard } from "./CreditCard/CreditCard";
+import CreditCard from "./CreditCard/CreditCard";
+import CreditCardEdit from "./CreditCard/CreditCardEdit";
 import CreditCardStatus from "./CreditCardStatus/CreditCardStatus";
 import CreditCardStatusEdit from "./CreditCardStatus/CreditCardStatusEdit";
 
@@ -10,5 +11,6 @@ export {
   CreditCardStatus,
   CreditCardProvider,
   CreditCardStatusEdit,
-  CreditCardProviderEdit
+  CreditCardProviderEdit,
+  CreditCardEdit
 }
