@@ -17,6 +17,7 @@ export function CreditCardTable({ props }) {
   const [selectedRow, setSelectedRow ] = React.useState();
   
   function onReload(qry) {
+    setSortCnt(0);
     props.onLoadCreditCard(qry);
   }
 

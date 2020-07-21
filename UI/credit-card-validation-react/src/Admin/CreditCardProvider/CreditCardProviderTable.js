@@ -16,8 +16,10 @@ export function CreditCardProviderTable({ props }) {
   const [open, setOpen ] = React.useState(false);
   const [selectedRow, setSelectedRow ] = React.useState();
   
-  function onReload(qry) {
-    props.onLoadCreditCardProvider(qry);
+  function onReload() {
+    setSortNameCnt(0);
+    setSortCodeCnt(0);
+    props.onReload(props.creditCardProvider.pagination);
   }
 
   const sortName = {
@@ -52,7 +54,7 @@ export function CreditCardProviderTable({ props }) {
 
     const qry = props.creditCardProvider.pagination;
     qry["sort"] = sortName[sortByCnt];
-    onReload(qry);
+    props.onReload(qry);
   }
 
   const onCodeSort = () => {
@@ -63,7 +65,7 @@ export function CreditCardProviderTable({ props }) {
 
     const qry = props.creditCardProvider.pagination;
     qry["sort"] = sortCode[sortByCnt];
-    onReload(qry);
+    props.onReload(qry);
   }
 
   const onDeleteClick = (selectedRow) => {
@@ -92,7 +94,7 @@ export function CreditCardProviderTable({ props }) {
         <Card.Header as="h5" className="d-flex justify-content-between align-items-center">
           <span>Credit Card Provider</span>
           <span className="pull-right">
-            <IconButton aria-label="reload" title="Reload credit card statuses" onClick={() => onReload(props.creditCardProvider.pagination)} style={{ outline: "none" }}>
+            <IconButton aria-label="reload" title="Reload credit card statuses" onClick={onReload} style={{ outline: "none" }}>
               <Cached />
             </IconButton>
             <Link to={"/admin/credit-card-provider/edit"}>
