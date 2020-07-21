@@ -2,6 +2,7 @@ import React from "react";
 import { TablePagination } from "@material-ui/core";
 import { connect } from "react-redux";
 import { Constants } from "../../Constants";
+import objectPath from "object-path";
 
 class MaterialPagination extends React.Component {
   constructor(props) {
@@ -45,10 +46,10 @@ class MaterialPagination extends React.Component {
     return (
       <TablePagination
         component="div"
-        count={this.props.pagination.totalCount || 0}
-        page={this.props.pagination.pageNumber - 1}
+        count={objectPath.get(this.props, "pagination.totalCount", 0)}
+        page={objectPath.get(this.props, "pagination.pageNumber", 1) - 1}
         onChangePage={this.handleChangePage}
-        rowsPerPage={this.props.pagination.pageSize}
+        rowsPerPage={objectPath.get(this.props, "pagination.pageSize", 10)}
         onChangeRowsPerPage={this.handleChangeRowsPerPage}
         rowsPerPageOptions={[5, 10, 25, 50, 100]}
       />
@@ -59,7 +60,7 @@ class MaterialPagination extends React.Component {
 
 function mapToStateProp(state) {
   return {
-    pagination: { ...state.creditCardStatus.pagination }
+    pagination: objectPath.get(state, "creditCardStatus.pagination")
   }
 }
 

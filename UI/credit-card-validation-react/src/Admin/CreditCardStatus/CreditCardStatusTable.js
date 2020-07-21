@@ -10,8 +10,9 @@ import MaterialPagination from "../Shared/MaterialPagination";
 import "./CreditCardStatusTable.css";
 import { Link } from "react-router-dom";
 import DeleteModal from "../Shared/DeleteModal";
+import objectPath from "object-path";
 
-export function CreditCardStatusTable({ creditCardStatus, props }) {
+export function CreditCardStatusTable({ props }) {
   let [sortCnt, setSortCnt] = React.useState(0);
   const [open, setOpen ] = React.useState(false);
   const [selectedRow, setSelectedRow ] = React.useState();
@@ -60,9 +61,8 @@ export function CreditCardStatusTable({ creditCardStatus, props }) {
     props.onDeleteCreditCardStatus(id);
   }
 
-  const creditCardStatuses = creditCardStatus ? creditCardStatus.results : [];
-  const metaData = creditCardStatus ? creditCardStatus.metaData : {};
-  const pagination = Object.keys(metaData).length !== 0 ? <MaterialPagination reload={onReload} /> : null;
+  const creditCardStatuses = objectPath.get(props, "creditCardStatus.fetchAll.results.results", []);
+  const pagination = <MaterialPagination reload={onReload} />;
   return (
     <Container>
       <DeleteModal open={open} onClose={onClose} selected={selectedRow} onDelete={onDelete}/>
