@@ -18,21 +18,18 @@ class CreditCardStatus extends React.Component {
   }
 
   render() {
-    let creditCardStatusResults;
     let fetchAll;
     let loading;
     if (objectPath.has(this.props, "creditCardStatus.fetchAll")) {
       fetchAll = this.props.creditCardStatus.fetchAll;
       loading = fetchAll.isFetching ? <LinearProgress /> : null;
-      creditCardStatusResults = this.props.creditCardStatus.fetchAll.results;
-
     }
 
 
     return (
       <React.Fragment>
         {loading}
-        <CreditCardStatusTable creditCardStatus={creditCardStatusResults} props={this.props} />
+        <CreditCardStatusTable props={{...this.props}} />
       </React.Fragment>
     )
   }
@@ -40,7 +37,8 @@ class CreditCardStatus extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    creditCardStatus: { ...state.creditCardStatus }
+    creditCardStatus: { ...state.creditCardStatus },
+    pagination: objectPath.get(state, "creditCardStatus.pagination")
   }
 }
 
@@ -70,8 +68,8 @@ function mapDispatchToProps(dispatch) {
     }
   }
   return {
-    onReload: () => {
-      dispatch({ type: Constants.creditCardStatus.RELOAD, data: "Some data" });
+    onReload: (qry) => {
+      loadCreditCardStatus(qry)
     },
     onLoadCreditCardState: (qry) => {
       loadCreditCardStatus(qry)
@@ -93,6 +91,9 @@ function mapDispatchToProps(dispatch) {
       } catch (err) {
         dispatch({ type: Constants.creditCardStatus.DELETE_SINGLE_FAILURE, data: err });
       }
+    },
+    setPagination: (pagination) => {
+      dispatch({ type: Constants.creditCardStatus.SET_GRID_PAGINATION, data: pagination });
     }
   }
 }

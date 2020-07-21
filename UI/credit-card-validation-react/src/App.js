@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import './App.css';
 import { MainNavBar } from "./Navbar/MainNavbar";
-import { CreditCard, CreditCardProvider, CreditCardStatus, CreditCardStatusEdit } from "./Admin";
+import { CreditCard, CreditCardProvider, CreditCardStatus, CreditCardStatusEdit, CreditCardProviderEdit } from "./Admin";
 import { SpeedDailer, TestFormSchema } from "./RND";
 import Login from "./Login/Login";
 
@@ -30,6 +30,8 @@ function App() {
           <Route exact path="/admin/credit-card-status/edit/:id" component={CreditCardStatusEdit} />
           <Route exact path="/admin/credit-card-status/edit" component={CreditCardStatusEdit} />
           <Route exact path="/admin/credit-card-provider" component={CreditCardProvider} />
+          <Route exact path="/admin/credit-card-provider/edit/:id" component={CreditCardProviderEdit} />
+          <Route exact path="/admin/credit-card-provider/edit" component={CreditCardProviderEdit} />
         </Container>
       </React.Fragment>
     </BrowserRouter>

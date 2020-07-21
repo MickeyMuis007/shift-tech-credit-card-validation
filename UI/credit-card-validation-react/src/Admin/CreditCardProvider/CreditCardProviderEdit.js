@@ -6,30 +6,35 @@ import { withRouter } from "react-router-dom";
 import { Constants } from "../../Constants";
 import objectPath from "object-path";
 
-class CreditCardStatusEdit extends React.Component {
+class CreditCardProviderEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       schema: {
-        "title": "Edit Credit Card Status",
+        "title": "Edit Credit Card Provider",
         "type": "object",
         "required": [
-          "status"
+          "name",
+          "code"
         ],
         "properties": {
-          "status": {
+          "name": {
             "type": "string",
-            "title": "Status"
+            "title": "Name"
           },
-          "description": {
+          "code": {
             "type": "string",
-            "title": "Description"
+            "title": "Code"
+          },
+          "startsWith": {
+            "type": "string",
+            "title": "StartsWith"
+          },
+          "length": {
+            "type": "string",
+            "title": "Length"
           }
         }
-      },
-      formData: {
-        status: "Test",
-        description: "Test Description"
       },
       isEdit: false
     }
@@ -39,7 +44,7 @@ class CreditCardStatusEdit extends React.Component {
 
   componentDidMount() {
     if (objectPath.has(this.props, "match.params.id")) {
-      this.props.fetchSingleCreditCardStatus(this.props.match.params.id, {});
+      this.props.fetchSingleCreditCardProvider(this.props.match.params.id, {});
       this.setState({
         isEdit: true
       })
@@ -61,9 +66,15 @@ class CreditCardStatusEdit extends React.Component {
   render() {
     const results = objectPath.get(this.props, "fetchSingle.results.results");
     const formData = results && this.state.isEdit ? 
-      { id: results.Id, status: results.Status, description: results.Description} : null;
+      { 
+        id: results.Id, 
+        name: results.Name, 
+        code: results.Code,
+        startsWith: results.StartsWith,
+        length: results.Length
+      } : null;
 
-    const title = this.state.isEdit ? "Edit Credit Card Status" : "Add Credit Card Status";
+    const title = this.state.isEdit ? "Edit Credit Card Provider" : "Add Credit Card Provider";
     const schema = {...this.state.schema, title: title};
 
     return (
@@ -76,7 +87,7 @@ class CreditCardStatusEdit extends React.Component {
 }
 
 function mapStateToProps (state) {
-  const fetchSingle = state && state.creditCardStatus && state.creditCardStatus.fetchSingle;
+  const fetchSingle = state && state.creditCardProvider && state.creditCardProvider.fetchSingle;
   return {
     fetchSingle
   };
@@ -84,23 +95,23 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchSingleCreditCardStatus: (id, qry = {}) => {
-      dispatch({ type: Constants.creditCardStatus.FETCH_SINGLE_REQUEST});
-      const url = `${Constants.api.HOST}/creditCardStatus/${id}`;
+    fetchSingleCreditCardProvider: (id, qry = {}) => {
+      dispatch({ type: Constants.creditCardProvider.FETCH_SINGLE_REQUEST});
+      const url = `${Constants.api.HOST}/creditCardProvider/${id}`;
       try {
         fetch(url)
           .then(res => res.json())
           .then(res => {
-            dispatch({ type: Constants.creditCardStatus.FETCH_SINGLE_SUCCESS, data: res})
+            dispatch({ type: Constants.creditCardProvider.FETCH_SINGLE_SUCCESS, data: res})
           })
           .catch(err => {
-            dispatch({ type: Constants.creditCardStatus.FETCH_SINGLE_FAILURE, data: err});
+            dispatch({ type: Constants.creditCardProvider.FETCH_SINGLE_FAILURE, data: err});
           })
       } catch (err) {
-        dispatch({ type: Constants.creditCardStatus.FETCH_SINGLE_FAILURE, data: err })
+        dispatch({ type: Constants.creditCardProvider.FETCH_SINGLE_FAILURE, data: err })
       }
     }
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreditCardStatusEdit));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreditCardProviderEdit));

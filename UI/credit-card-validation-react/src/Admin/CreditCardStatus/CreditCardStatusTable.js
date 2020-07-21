@@ -7,7 +7,6 @@ import { Fab } from "@material-ui/core";
 import { Cached, ArrowDropDown } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import MaterialPagination from "../Shared/MaterialPagination";
-import "./CreditCardStatusTable.css";
 import { Link } from "react-router-dom";
 import DeleteModal from "../Shared/DeleteModal";
 import objectPath from "object-path";
@@ -17,8 +16,7 @@ export function CreditCardStatusTable({ props }) {
   const [open, setOpen ] = React.useState(false);
   const [selectedRow, setSelectedRow ] = React.useState();
   
-  function onReload(qry, isSort) {
-    if (!isSort) qry["sort"] = sortStatus[sortCnt];
+  function onReload(qry) {
     props.onLoadCreditCardState(qry);
   }
 
@@ -41,7 +39,7 @@ export function CreditCardStatusTable({ props }) {
 
     const qry = props.creditCardStatus.pagination;
     qry["sort"] = sortStatus[sortByCnt];
-    onReload(qry, true);
+    onReload(qry);
   }
 
   const onDeleteClick = (selectedRow) => {
@@ -62,7 +60,7 @@ export function CreditCardStatusTable({ props }) {
   }
 
   const creditCardStatuses = objectPath.get(props, "creditCardStatus.fetchAll.results.results", []);
-  const pagination = <MaterialPagination reload={onReload} />;
+  const pagination = <MaterialPagination props={{...props}} />;
   return (
     <Container>
       <DeleteModal open={open} onClose={onClose} selected={selectedRow} onDelete={onDelete}/>
