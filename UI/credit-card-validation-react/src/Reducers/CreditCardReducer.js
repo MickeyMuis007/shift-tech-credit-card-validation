@@ -14,6 +14,11 @@ export function CreditCardReducer(state, action) {
             reload: true
           }
         });
+      case Constants.creditCard.ALERT_SHOW_SUCCESS:
+      case Constants.creditCard.ALERT_SHOW_ERROR:
+      case Constants.creditCard.ALERT_CLOSE_SUCCESS:
+      case Constants.creditCard.ALERT_CLOSE_ERROR:
+        return alertState(state, action);
       case Constants.creditCard.FETCH_ALL_REQUEST:
       case Constants.creditCard.FETCH_ALL_SUCCESS:
       case Constants.creditCard.FETCH_ALL_FAILURE:
@@ -43,6 +48,53 @@ export function CreditCardReducer(state, action) {
     }
   } catch (err) {
     return state;
+  }
+}
+
+function alertState(state, action) {
+  switch (action.type) {
+    case Constants.creditCard.ALERT_SHOW_SUCCESS:
+      return Object.assign({}, state, {
+        creditCard: {
+          ...state.creditCard,
+          alert: {
+            ...state.creditCard.alert,
+            showSuccess: true
+          }
+        }
+      });
+    case Constants.creditCard.ALERT_SHOW_ERROR:
+      return Object.assign({}, state, {
+        creditCard: {
+          ...state.creditCard,
+          alert: {
+            ...state.creditCard.alert,
+            showError: true
+          }
+        }
+      });
+    case Constants.creditCard.ALERT_CLOSE_SUCCESS:
+      return Object.assign({}, state, {
+        creditCard: {
+          ...state.creditCard,
+          alert: {
+            ...state.creditCard.alert,
+            showSuccess: false
+          }
+        }
+      });
+    case Constants.creditCard.ALERT_CLOSE_ERROR:
+      return Object.assign({}, state, {
+        creditCard: {
+          ...state.creditCard,
+          alert: {
+            ...state.creditCard.alert,
+            showError: false
+          }
+        }
+      });
+    default:
+      return state;
   }
 }
 

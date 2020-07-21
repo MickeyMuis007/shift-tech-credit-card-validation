@@ -19,9 +19,7 @@ class Home extends React.Component {
 
     this.state = {
       provider: "",
-      no: "",
-      alertSuccessOpen: false,
-      alertErrorOpen: false
+      no: ""
     }
 
     this.onProviderChange = this.onProviderChange.bind(this);
@@ -60,43 +58,27 @@ class Home extends React.Component {
       no: "",
       provider: ""
     });
-
-    if (this.state.no === "1") {
-      this.setState({
-        alertSuccessOpen: true
-      })
-    } else if (this.state.no === "2") {
-      this.setState({
-        alertErrorOpen: true
-      })
-    }
   }
 
   onAlertSuccessClose() {
-    this.setState({
-      alertSuccessOpen: false
-    })
+    this.props.onAlertCloseSuccess();
   }
 
   onAlertErrorClose() {
-    this.setState({
-      alertErrorOpen: false
-    })
+    this.props.onAlertCloseError();
   }
 
   render() {
-    console.log(this.props);
-
     const providers = objectPath.get(this.props, "providers", []);
     const menuItems = providers.map(t => <MenuItem key={t.Id} value={t.Id}>{t.Code}</MenuItem>)
 
     return (
       <React.Fragment>
-        <Collapse in={this.state.alertSuccessOpen}>
-          <Alert onClose={this.onAlertSuccessClose}>This is a success alert — check it out!</Alert>
+        <Collapse in={this.props.showAlertSuccess}>
+          <Alert onClose={this.onAlertSuccessClose}>Credit card is valid!!!</Alert>
         </Collapse>
-        <Collapse in={this.state.alertErrorOpen}>
-          <Alert severity="error" onClose={this.onAlertErrorClose}>This is a success alert — check it out!</Alert>
+        <Collapse in={this.props.showAlertError}>
+          <Alert severity="error" onClose={this.onAlertErrorClose}>Credit Card is invalid!!!</Alert>
         </Collapse>
         <Form onSubmit={this.onSubmit}>
           <Container className="container-center-abs">
@@ -125,8 +107,12 @@ class Home extends React.Component {
 
 function mapStateToProps(state) {
   const providers = objectPath.get(state, "creditCardProvider.fetchAll.results.results");
+  const showAlertSuccess = objectPath.get(state, "creditCard.alert.showSuccess");
+  const showAlertError = objectPath.get(state, "creditCard.alert.showError");
   return {
-    providers
+    providers,
+    showAlertError,
+    showAlertSuccess
   };
 }
 
@@ -153,16 +139,22 @@ function mapDispatchToProps(dispatch) {
   }
 
   const validateCreditCardNo = (data) => {
-    dispatch({ type: Constants.creditCard.VALIDATE_NO_REQUEST});
+    dispatch({ type: Constants.creditCard.VALIDATE_NO_REQUEST });
     try {
-      fetch(`${Constants.api.HOST}/creditCard/validateCreditCardNo`, { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)})
+      fetch(`${Constants.api.HOST}/creditCard/validateCreditCardNo`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
         .then(res => res && res.json && res.json())
         .then(res => {
           console.log("Validate response:", res);
-          dispatch({ type: Constants.creditCard.VALIDATE_NO_SUCCESS, data: res});
+          dispatch({ type: Constants.creditCard.VALIDATE_NO_SUCCESS, data: res });
+          dispatch({ type: Constants.creditCard.ALERT_SHOW_SUCCESS });
+          dispatch({ type: Constants.creditCard.ALERT_SHOW_ERROR });
+        }).catch(err => {
+          dispatch({ type: Constants.creditCard.VALIDATE_NO_FAILURE, data: err });
+          dispatch({ type: Constants.creditCard.ALERT_SHOW_ERROR });
         })
-    } catch(err) {
-      dispatch({ type: Constants.creditCard.VALIDATE_NO_FAILURE, data: err});
+    } catch (err) {
+      dispatch({ type: Constants.creditCard.VALIDATE_NO_FAILURE, data: err });
+      dispatch({ type: Constants.creditCard.ALERT_SHOW_ERROR });
     }
   }
 
@@ -172,6 +164,12 @@ function mapDispatchToProps(dispatch) {
     },
     onValidateCreditCardNo: (data) => {
       validateCreditCardNo(data);
+    },
+    onAlertCloseSuccess: () => {
+      dispatch({ type: Constants.creditCard.ALERT_CLOSE_SUCCESS})
+    },
+    onAlertCloseError: () => {
+      dispatch({ type: Constants.creditCard.ALERT_CLOSE_ERROR});
     }
   }
 }
