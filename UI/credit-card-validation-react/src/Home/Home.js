@@ -34,7 +34,6 @@ class Home extends React.Component {
   }
 
   onProviderChange(event) {
-    console.log(event.target.value);
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -48,7 +47,6 @@ class Home extends React.Component {
 
   onSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     this.props.onValidateCreditCardNo({
       no: this.state.no,
       creditCardProviderId: this.state.provider
@@ -144,7 +142,6 @@ function mapDispatchToProps(dispatch) {
       fetch(`${Constants.api.HOST}/creditCard/validateCreditCardNo`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
         .then(res => res && res.json && res.json())
         .then(res => {
-          console.log("Validate response:", res);
           dispatch({ type: Constants.creditCard.VALIDATE_NO_SUCCESS, data: res });
           dispatch({ type: Constants.creditCard.ALERT_SHOW_SUCCESS });
           dispatch({ type: Constants.creditCard.ALERT_SHOW_ERROR });
