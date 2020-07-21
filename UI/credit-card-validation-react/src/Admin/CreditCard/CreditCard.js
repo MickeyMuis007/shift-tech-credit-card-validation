@@ -15,6 +15,8 @@ class CreditCard extends React.Component {
 
   componentDidMount() {
     this.props.onLoadCreditCard();
+    this.props.onLoadCreditCardStatus();
+    this.props.onLoadCreditCardProvider();
   }
 
   render() {
@@ -29,7 +31,7 @@ class CreditCard extends React.Component {
     return (
       <React.Fragment>
         {loading}
-        <CreditCardTable props={{...this.props}} />
+        <CreditCardTable props={{ ...this.props }} />
       </React.Fragment>
     )
   }
@@ -38,7 +40,9 @@ class CreditCard extends React.Component {
 function mapStateToProps(state) {
   return {
     creditCard: { ...state.creditCard },
-    pagination: objectPath.get(state, "creditCard.pagination")
+    pagination: objectPath.get(state, "creditCard.pagination"),
+    creditCardStatus: { ...state.creditCardStatus },
+    creditCardProvider: { ...state.creditCardProvider}
   }
 }
 
@@ -67,6 +71,49 @@ function mapDispatchToProps(dispatch) {
       dispatch({ type: Constants.creditCard.FETCH_ALL_FAILURE, data: err });
     }
   }
+
+  const loadCreditCardStatus = () => {
+    dispatch({ type: Constants.creditCardStatus.FETCH_ALL_REQUEST });
+    try {
+      fetch(`${Constants.api.HOST}/creditCardStatus`)
+        .then(res => res.json())
+        .then(res => {
+          dispatch({ type: Constants.creditCardStatus.FETCH_ALL_SUCCESS, data: res });
+          dispatch({
+            type: Constants.creditCardStatus.SET_GRID_PAGINATION, data: {
+              pageSize: res.metaData.pageSize,
+              pageNumber: res.metaData.currentPage,
+              totalCount: res.metaData.totalCount
+            }
+          })
+
+        });
+    } catch (err) {
+      dispatch({ type: Constants.creditCardStatus.FETCH_ALL_FAILURE, data: err });
+    }
+  }
+
+  const loadCreditCardProvider = () => {
+    dispatch({ type: Constants.creditCardProvider.FETCH_ALL_REQUEST });
+    try {
+      fetch(`${Constants.api.HOST}/creditCardProvider`)
+        .then(res => res.json())
+        .then(res => {
+          dispatch({ type: Constants.creditCardProvider.FETCH_ALL_SUCCESS, data: res });
+          dispatch({
+            type: Constants.creditCardProvider.SET_GRID_PAGINATION, data: {
+              pageSize: res.metaData.pageSize,
+              pageNumber: res.metaData.currentPage,
+              totalCount: res.metaData.totalCount
+            }
+          })
+
+        });
+    } catch (err) {
+      dispatch({ type: Constants.creditCardProvider.FETCH_ALL_FAILURE, data: err });
+    }
+  }
+
   return {
     onReload: (qry) => {
       loadCreditCard(qry)
@@ -82,7 +129,7 @@ function mapDispatchToProps(dispatch) {
           .then((res) => {
             dispatch({ type: Constants.creditCard.DELETE_SINGLE_SUCCESS, data: res });
             loadCreditCard({
-              pageNumber: 1, 
+              pageNumber: 1,
               pageSize: 10
             });
           }).catch((err) => {
@@ -94,6 +141,12 @@ function mapDispatchToProps(dispatch) {
     },
     setPagination: (pagination) => {
       dispatch({ type: Constants.creditCard.SET_GRID_PAGINATION, data: pagination });
+    },
+    onLoadCreditCardStatus: () => {
+      loadCreditCardStatus()
+    },
+    onLoadCreditCardProvider: () => {
+      loadCreditCardProvider()
     }
   }
 }
