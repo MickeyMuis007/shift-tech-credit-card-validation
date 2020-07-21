@@ -34,6 +34,10 @@ export function CreditCardReducer(state, action) {
       case Constants.creditCard.UPDATE_SINGLE_SUCCESS:
       case Constants.creditCard.UPDATE_SINGLE_FAILURE:
         return updateSingle(state, action);
+      case Constants.creditCard.VALIDATE_NO_REQUEST:
+      case Constants.creditCard.VALIDATE_NO_SUCCESS:
+      case Constants.creditCard.VALIDATE_NO_FAILURE:
+        return validateCreditCardNo(state, action);
       default:
         return state;
     }
@@ -244,6 +248,45 @@ function updateSingle(state, action) {
         creditCard: {
           ...state.creditCard,
           updateSingle: {
+            isFetching: false,
+            didInvalidate: false,
+            error: action.data
+          }
+        }
+      });
+    default:
+      return state;
+  }
+}
+
+function validateCreditCardNo(state, action) {
+  switch (action.type) {
+    case Constants.creditCard.VALIDATE_NO_REQUEST:
+      return Object.assign({}, state, {
+        creditCard: {
+          ...state.creditCard,
+          validateCreditCardNo: {
+            isFetching: true,
+            didInvalidate: false
+          }
+        }
+      })
+    case Constants.creditCard.VALIDATE_NO_SUCCESS:
+      return Object.assign({}, state, {
+        creditCard: {
+          ...state.creditCard,
+          validateCreditCardNo: {
+            isFetching: false,
+            didInvalidate: false,
+            results: action.data
+          }
+        }
+      });
+    case Constants.creditCard.VALIDATE_NO_FAILURE:
+      return Object.assign({}, state, {
+        creditCard: {
+          ...state.creditCard,
+          validateCreditCardNo: {
             isFetching: false,
             didInvalidate: false,
             error: action.data

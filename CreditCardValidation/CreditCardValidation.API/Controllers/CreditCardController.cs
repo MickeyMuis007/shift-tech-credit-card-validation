@@ -33,6 +33,13 @@ namespace CreditCardValidation.API.Controllers
 			_propertyCheckerService = propertyCheckerService;
 		}
 
+		[HttpPost("validateCreditCardNo", Name = "ValidateCreditCard")]
+		public IActionResult ValidateCreditCardNo([FromBody] object creditCard)
+		{
+			return Ok(creditCard);
+		}
+
+
 		[HttpGet(Name = "GetCreditCardList")]
 		[HttpHead]
 		public async Task<IActionResult> Get([FromQuery] CreditCardQueryParams query)

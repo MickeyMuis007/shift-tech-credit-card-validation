@@ -51,6 +51,11 @@ class Home extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     console.log(this.state);
+    this.props.onValidateCreditCardNo({
+      no: this.state.no,
+      creditCardProviderId: this.state.provider
+    });
+
     this.setState({
       no: "",
       provider: ""
@@ -60,7 +65,7 @@ class Home extends React.Component {
       this.setState({
         alertSuccessOpen: true
       })
-    } else {
+    } else if (this.state.no === "2") {
       this.setState({
         alertErrorOpen: true
       })
@@ -147,9 +152,26 @@ function mapDispatchToProps(dispatch) {
     }
   }
 
+  const validateCreditCardNo = (data) => {
+    dispatch({ type: Constants.creditCard.VALIDATE_NO_REQUEST});
+    try {
+      fetch(`${Constants.api.HOST}/creditCard/validateCreditCardNo`, { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)})
+        .then(res => res && res.json && res.json())
+        .then(res => {
+          console.log("Validate response:", res);
+          dispatch({ type: Constants.creditCard.VALIDATE_NO_SUCCESS, data: res});
+        })
+    } catch(err) {
+      dispatch({ type: Constants.creditCard.VALIDATE_NO_FAILURE, data: err});
+    }
+  }
+
   return {
     onLoadCreditCardProvider: () => {
       loadCreditCardProvider()
+    },
+    onValidateCreditCardNo: (data) => {
+      validateCreditCardNo(data);
     }
   }
 }
