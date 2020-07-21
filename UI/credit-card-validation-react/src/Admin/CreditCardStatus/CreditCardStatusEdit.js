@@ -14,7 +14,7 @@ class CreditCardStatusEdit extends React.Component {
         "title": "Edit Credit Card Status",
         "type": "object",
         "required": [
-          "status"
+          // "status"
         ],
         "properties": {
           "status": {
@@ -35,23 +35,29 @@ class CreditCardStatusEdit extends React.Component {
     }
 
     this.onBack = this.onBack.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
     if (objectPath.has(this.props, "match.params.id")) {
       this.props.fetchSingleCreditCardStatus(this.props.match.params.id, {});
       this.setState({
-        isEdit: true
+        isEdit: true,
+        save: this.props.onUpdateCreditStatus
       })
     } else {
       this.setState({
-        isEdit: false
+        isEdit: false,
+        save: this.props.onAddCreditCardStatus
       })
     }
   }
 
   onSubmit(results) {
-    console.log("CreditCardStatusOnSubmit", results);
+    if (objectPath.has(results, "formData.status")) {
+      this.state.save(results.formData, this.props.match.params.id);
+      this.props.history.goBack();
+    }
   }
 
   onBack() {
@@ -61,7 +67,7 @@ class CreditCardStatusEdit extends React.Component {
   render() {
     const results = objectPath.get(this.props, "fetchSingle.results.results");
     const formData = results && this.state.isEdit ? 
-      { id: results.Id, status: results.Status, description: results.Description} : null;
+      { id: results.Id, status: results.Status, description: results.Description || ""} : null;
 
     const title = this.state.isEdit ? "Edit Credit Card Status" : "Add Credit Card Status";
     const schema = {...this.state.schema, title: title};
@@ -83,6 +89,7 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch) {
+  const restUrl = `${Constants.api.HOST}/creditCardStatus`;
   return {
     fetchSingleCreditCardStatus: (id, qry = {}) => {
       dispatch({ type: Constants.creditCardStatus.FETCH_SINGLE_REQUEST});
@@ -98,6 +105,30 @@ function mapDispatchToProps (dispatch) {
           })
       } catch (err) {
         dispatch({ type: Constants.creditCardStatus.FETCH_SINGLE_FAILURE, data: err })
+      }
+    },
+    onAddCreditCardStatus: (data) => {
+      dispatch({ type: Constants.creditCardStatus.POST_SINGLE_REQUEST});
+      try {
+        fetch(`${restUrl}`, { method: "POST", headers: { "Content-Type": "application/json"}, body: JSON.stringify(data)})
+          .then(res => res.json())
+          .then((res) => {
+            dispatch({ type: Constants.creditCardStatus.POST_SINGLE_SUCCESS, data: res});
+          })
+      } catch(err) {
+        dispatch({ type: Constants.creditCardStatus.POST_SINGLE_FAILURE, data: err});
+      }
+    },
+    onUpdateCreditStatus: (data, id) => {
+      dispatch({ type: Constants.creditCardStatus.UPDATE_SINGLE_REQUEST});
+      try {
+        fetch(`${restUrl}/${id}`, { method: "PUT", headers: { "Content-Type": "application/json"}, body: JSON.stringify(data)})
+          .then(res => res.status)
+          .then(res => {
+            dispatch({ type: Constants.creditCardStatus.UPDATE_SINGLE_SUCCESS, data: res});
+          })
+      } catch (err) {
+        dispatch({ type: Constants.creditCardStatus.UPDATE_SINGLE_FAILURE, data: err});
       }
     }
   };

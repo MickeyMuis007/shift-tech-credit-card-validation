@@ -67,6 +67,11 @@ function mapDispatchToProps(dispatch) {
       dispatch({ type: Constants.creditCardStatus.FETCH_ALL_FAILURE, data: err });
     }
   }
+
+  const paginationInit = {
+    pageNumber: 1, 
+    pageSize: 10
+  };
   return {
     onReload: (qry) => {
       loadCreditCardStatus(qry)
@@ -81,10 +86,7 @@ function mapDispatchToProps(dispatch) {
           .then((res) => res.status)
           .then((res) => {
             dispatch({ type: Constants.creditCardStatus.DELETE_SINGLE_SUCCESS, data: res });
-            loadCreditCardStatus({
-              pageNumber: 1, 
-              pageSize: 10
-            });
+            loadCreditCardStatus(paginationInit);
           }).catch((err) => {
             dispatch({ type: Constants.creditCardStatus.DELETE_SINGLE_FAILURE, data: err });
           })
