@@ -15,8 +15,20 @@ A job should update 5 of the captured credit cards as “Processed” every 30 s
 Processed cards should not be reprocessed. 
 
 ## Run Project
+> Requirements to run will application
+> - MySql
+> - Dotnet Core 3
+> - Node
+
+# API
+> - Go to folder: /CreditCardValidation/CreditCardValidation.API
+> - Install package with: dotnet restore
+> - Run api with: dotnet run
+
 # UI
-> Folder
+> - Go to folder: /UI/credit-card-validation-react
+> - first install packages: npm i
+> - then run ui: npm start
 
 ## How to validate a Credit Card Number?
 > Most credit card number can be validated using the Luhn algorithm, which is more or a less a glorified Modulo 10 formula!
@@ -42,7 +54,7 @@ Amex | 378282246310005 | 	05/2023 |  |  | Success
 Amex | 343434736000692 | 	05/2023 |  |  | Failure
 Amex | 340813837964364 | 	05/2023 |  |  | Failure
 Amex | 345853567934887 | 	05/2023 |  |  | Failure
-Discover | 60115564485789458 | 	05/2023 |  | US/USD  | Success
+Discover | 6011556448578945 | 	05/2023 |  | US/USD  | Success
 Discover | 6011000991300009 | 	05/2023 |  | US/USD | Success
 Discover | 6011293173161551 | 	05/2023 |  | | Failure
 Discover | 6011332856732405 | 	05/2023 |  | | Failure
