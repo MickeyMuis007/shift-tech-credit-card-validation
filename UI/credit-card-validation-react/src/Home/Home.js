@@ -47,15 +47,13 @@ class Home extends React.Component {
 
   onSubmit(event) {
     event.preventDefault();
+    this.props.onAlertCloseError();
+    this.props.onAlertCloseSuccess();
     this.props.onValidateCreditCardNo({
       no: this.state.no,
       creditCardProviderId: this.state.provider
     });
 
-    this.setState({
-      no: "",
-      provider: ""
-    });
   }
 
   onAlertSuccessClose() {
@@ -143,23 +141,19 @@ function mapDispatchToProps(dispatch) {
         .then(res => res && res.json && res.json())
         .then(res => {
           dispatch({ type: Constants.creditCard.VALIDATE_NO_SUCCESS, data: res });
-          dispatch({ type: Constants.creditCard.ALERT_SHOW_SUCCESS });
-          setTimeout(() => {
-            dispatch({ type: Constants.creditCard.ALERT_CLOSE_SUCCESS });
-          }, 5000);
+
+          if (objectPath.get(res, "valid")) {
+            dispatch({ type: Constants.creditCard.ALERT_SHOW_SUCCESS });
+          } else {
+            dispatch({ type: Constants.creditCard.ALERT_SHOW_ERROR });
+          }
         }).catch(err => {
           dispatch({ type: Constants.creditCard.VALIDATE_NO_FAILURE, data: err });
           dispatch({ type: Constants.creditCard.ALERT_SHOW_ERROR });
-          setTimeout(() => {
-            dispatch({ type: Constants.creditCard.ALERT_CLOSE_ERROR });
-          }, 5000);
         })
     } catch (err) {
       dispatch({ type: Constants.creditCard.VALIDATE_NO_FAILURE, data: err });
       dispatch({ type: Constants.creditCard.ALERT_SHOW_ERROR });
-      setTimeout(() => {
-        dispatch({ type: Constants.creditCard.ALERT_CLOSE_ERROR });
-      }, 5000);
     }
   }
 
@@ -171,10 +165,10 @@ function mapDispatchToProps(dispatch) {
       validateCreditCardNo(data);
     },
     onAlertCloseSuccess: () => {
-      dispatch({ type: Constants.creditCard.ALERT_CLOSE_SUCCESS})
+      dispatch({ type: Constants.creditCard.ALERT_CLOSE_SUCCESS })
     },
     onAlertCloseError: () => {
-      dispatch({ type: Constants.creditCard.ALERT_CLOSE_ERROR});
+      dispatch({ type: Constants.creditCard.ALERT_CLOSE_ERROR });
     }
   }
 }

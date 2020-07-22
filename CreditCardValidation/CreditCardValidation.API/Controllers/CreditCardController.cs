@@ -38,9 +38,9 @@ namespace CreditCardValidation.API.Controllers
 		}
 
 		[HttpPost("validateCreditCardNo", Name = "ValidateCreditCard")]
-		public IActionResult ValidateCreditCardNo([FromBody] CreditCardInsertDTO creditCard)
+		public async Task<IActionResult> ValidateCreditCardNo([FromBody] CreditCardInsertDTO creditCard)
 		{
-			var results = _validationService.ValidateCreditCardNo(creditCard);
+			var results = await _validationService.ValidateCreditCardNo(creditCard);
 			return Ok(results);
 		}
 
