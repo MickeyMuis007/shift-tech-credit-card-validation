@@ -34,7 +34,7 @@ namespace CreditCardValidation.API.Controllers
 		}
 
 		[HttpPost("validateCreditCardNo", Name = "ValidateCreditCard")]
-		public IActionResult ValidateCreditCardNo([FromBody] object creditCard)
+		public IActionResult ValidateCreditCardNo([FromBody] CreditCardInsertDTO creditCard)
 		{
 			return Ok(creditCard);
 		}
