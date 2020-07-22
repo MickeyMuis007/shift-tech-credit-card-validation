@@ -144,18 +144,22 @@ function mapDispatchToProps(dispatch) {
         .then(res => {
           dispatch({ type: Constants.creditCard.VALIDATE_NO_SUCCESS, data: res });
           dispatch({ type: Constants.creditCard.ALERT_SHOW_SUCCESS });
-          dispatch({ type: Constants.creditCard.ALERT_SHOW_ERROR });
           setTimeout(() => {
-            dispatch({ type: Constants.creditCard.ALERT_CLOSE_ERROR });
             dispatch({ type: Constants.creditCard.ALERT_CLOSE_SUCCESS });
           }, 5000);
         }).catch(err => {
           dispatch({ type: Constants.creditCard.VALIDATE_NO_FAILURE, data: err });
           dispatch({ type: Constants.creditCard.ALERT_SHOW_ERROR });
+          setTimeout(() => {
+            dispatch({ type: Constants.creditCard.ALERT_CLOSE_ERROR });
+          }, 5000);
         })
     } catch (err) {
       dispatch({ type: Constants.creditCard.VALIDATE_NO_FAILURE, data: err });
       dispatch({ type: Constants.creditCard.ALERT_SHOW_ERROR });
+      setTimeout(() => {
+        dispatch({ type: Constants.creditCard.ALERT_CLOSE_ERROR });
+      }, 5000);
     }
   }
 

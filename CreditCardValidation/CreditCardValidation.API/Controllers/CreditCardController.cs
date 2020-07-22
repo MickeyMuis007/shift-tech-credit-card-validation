@@ -13,6 +13,7 @@ using CreditCardValidation.Domain.CreditCardAggregate;
 using SharedKernel.Interfaces;
 using SharedKernel.Models;
 using SharedKernel.Extensions;
+using CreditCardValidation.Application.Services;
 
 namespace CreditCardValidation.API.Controllers
 {
@@ -25,18 +26,22 @@ namespace CreditCardValidation.API.Controllers
 		private readonly CreditCardBuilder _creditCardBuilder;
 		private readonly IPropertyMappingService _propertyMappingService;
 		private readonly IPropertyCheckerService _propertyCheckerService;
+		private readonly ICreditCardValidationService _validationService;
 
-		public CreditCardController(CreditCardBuilder builder, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService)
+		public CreditCardController(CreditCardBuilder builder, IPropertyMappingService propertyMappingService,
+			IPropertyCheckerService propertyCheckerService, ICreditCardValidationService validationService)
 		{
 			_creditCardBuilder = builder;
 			_propertyMappingService = propertyMappingService;
 			_propertyCheckerService = propertyCheckerService;
+			_validationService = validationService;
 		}
 
 		[HttpPost("validateCreditCardNo", Name = "ValidateCreditCard")]
 		public IActionResult ValidateCreditCardNo([FromBody] CreditCardInsertDTO creditCard)
 		{
-			return Ok(creditCard);
+			var results = _validationService.ValidateCreditCardNo(creditCard);
+			return Ok(results);
 		}
 
 
