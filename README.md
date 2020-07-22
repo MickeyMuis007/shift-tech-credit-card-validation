@@ -14,6 +14,10 @@ Display all the credit cards that have been successfully captured so far.
 A job should update 5 of the captured credit cards as “Processed” every 30 seconds. 
 Processed cards should not be reprocessed. 
 
+## Run Project
+# UI
+> Folder
+
 ## How to validate a Credit Card Number?
 > Most credit card number can be validated using the Luhn algorithm, which is more or a less a glorified Modulo 10 formula!
 
