@@ -14,18 +14,18 @@ Display all the credit cards that have been successfully captured so far.
 A job should update 5 of the captured credit cards as “Processed” every 30 seconds. 
 Processed cards should not be reprocessed. 
 
-## Run Project
+# Run Project
 > Requirements to run will application
 > - MySql
 > - Dotnet Core 3
 > - Node
 
-# API
+## API
 > - Go to folder: /CreditCardValidation/CreditCardValidation.API
 > - Install package with: dotnet restore
 > - Run api with: dotnet run
 
-# UI
+## UI
 > - Go to folder: /UI/credit-card-validation-react
 > - first install packages: npm i
 > - then run ui: npm start
